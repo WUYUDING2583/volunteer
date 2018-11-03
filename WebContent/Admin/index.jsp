@@ -40,12 +40,12 @@
 	<form role="form" class="form-horizontal" action="../login" method="post">
 		<div class="form-group" style="margin-top:30px;">
 		    <div class="col-sm-offset-1 col-sm-10">
-		      <input type="text" class="form-control input-lg" id="userNo" name="account" placeholder="请输入账号">
+		      <input type="text" class="form-control input-lg" id="userNo" name="admin.account" placeholder="请输入账号">
 		    </div>
 	  	</div>	
 	  	<div class="form-group">
 		    <div class="col-sm-offset-1 col-sm-10">
-		      <input type="password" class="form-control input-lg" id="password" name="password" placeholder="请输入密码">
+		      <input type="password" class="form-control input-lg" id="password" name="admin.password" placeholder="请输入密码">
 		    </div>
 	  	</div>	
 	  	<div class="form-group" style="margin-bottom:30px;">
