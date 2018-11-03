@@ -32,6 +32,7 @@
 
 </head>
 <body >
+<s:fielderror/>
 	<div class="col-sm-4 col-sm-offset-4" id="window">
 	<div id="myAlert" class="alert alert-danger col-sm-offset-1 col-sm-10" style="margin-top:30px;">
 		<input type="hidden" id="msg" value="<%=session.getAttribute("wrongMsg") %>">
@@ -69,7 +70,7 @@
 	$(document).ready(function(){
 		
 		$("#login").on("click",function(){
-			var username=$("#userNo").val();
+			/*var username=$("#userNo").val();
 			var password=$("#password").val();
 			if(username==""){
 				$("p").text("用户名不能为空");
@@ -78,7 +79,7 @@
 			if(password==""){
 				$("p").text("密码不能为空");
 				return;
-			}
+			}*/
 			$("form").submit();
 			
 		});

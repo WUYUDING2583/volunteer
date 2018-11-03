@@ -4,9 +4,10 @@
 "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<package name="strutsBean" extends="struts-default" namespace="/">
-		<action name="login" class="cn.edu.zjut.action.UserAction">
-			<result name="loginSuccess">/loginSuccess.jsp</result>
-			<result name="loginFail">/loginFail.jsp</result>
+		<action name="login" class="volunteer.action.AdminAction" method="login">
+			<result name="loginSuccess">/Admin/main.jsp</result>
+			<result name="loginFail">/Admin/index.jsp</result>
+			<result name="input" type="redirect">/Admin/index.jsp</result>
 		</action>
 	</package>
 </struts>
