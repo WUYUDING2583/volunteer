@@ -67,14 +67,14 @@ public class addActivity extends HttpServlet {
 		String message=null;
 	    String temp_str="";   
 	    Date dt = new Date();   
-	    //×îºóµÄaa±íÊ¾¡°ÉÏÎç¡±»ò¡°ÏÂÎç¡±    HH±íÊ¾24Ğ¡Ê±ÖÆ    Èç¹û»»³Éhh±íÊ¾12Ğ¡Ê±ÖÆ   
+	    //æœ€åçš„aaè¡¨ç¤ºâ€œä¸Šåˆâ€æˆ–â€œä¸‹åˆâ€    HHè¡¨ç¤º24å°æ—¶åˆ¶    å¦‚æœæ¢æˆhhè¡¨ç¤º12å°æ—¶åˆ¶   
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
 	    temp_str=sdf.format(dt); 
 	    String picturePath=(String) request.getSession().getAttribute("picturePath");
 		try {
-			JsonParser parser =new JsonParser();  //´´½¨json½âÎöÆ÷
-			JsonObject object=(JsonObject) parser.parse(data);  //´´½¨JsonObject¶ÔÏó
-			JsonArray array=object.get("activity").getAsJsonArray();    //µÃµ½ÎªjsonµÄÊı×é
+			JsonParser parser =new JsonParser();  //åˆ›å»ºjsonè§£æå™¨
+			JsonObject object=(JsonObject) parser.parse(data);  //åˆ›å»ºJsonObjectå¯¹è±¡
+			JsonArray array=object.get("activity").getAsJsonArray();    //å¾—åˆ°ä¸ºjsonçš„æ•°ç»„
 			for(int i=0;i<array.size();i++){
                 JsonObject subObject=array.get(i).getAsJsonObject();
                 if(i==0) {
@@ -90,7 +90,7 @@ public class addActivity extends HttpServlet {
                     info.setLat(subObject.get("lat").getAsDouble());
                     info.setLng(subObject.get("lng").getAsDouble());
                 }
-                JsonArray arr=subObject.get("Ajob").getAsJsonArray();    //µÃµ½ÎªjsonµÄÊı×é
+                JsonArray arr=subObject.get("Ajob").getAsJsonArray();    //å¾—åˆ°ä¸ºjsonçš„æ•°ç»„
                 for(int j=0;j<arr.size();j++) {
     				ActReq req=new ActReq();
     				req.setAno(Ano);

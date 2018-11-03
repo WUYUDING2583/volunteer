@@ -32,12 +32,12 @@ public class InitServlet extends HttpServlet {
          TokenThread.secret = config.getInitParameter("secret");    
          System.out.println("weixin api appid:"+TokenThread.appid);    
          System.out.println("weixin api appsecret:"+ TokenThread.secret);
-         // Î´ÅäÖÃappid¡¢secretÊ±¸ø³öÌáÊ¾    
+         // æœªé…ç½®appidã€secretæ—¶ç»™å‡ºæç¤º    
          if ("".equals(TokenThread.appid) || "".equals(TokenThread.secret)) {    
             System.out.println("appid and appsecret configuration error, please check carefully.");    
          } else 
          {    
-             // Æô¶¯¶¨Ê±»ñÈ¡access_tokenµÄÏß³Ì    
+             // å¯åŠ¨å®šæ—¶è·å–access_tokençš„çº¿ç¨‹    
              new Thread(new TokenThread()).start();    
          }   
 

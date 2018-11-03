@@ -15,7 +15,7 @@ public class getOpenId {
 	
 	
 	public getOpenId() {
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êı´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ„é€ å‡½æ•°å­˜æ ¹
 	}
 	public String getOpenId(String JSCODE) throws IOException
 	{

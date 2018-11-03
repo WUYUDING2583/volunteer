@@ -54,7 +54,7 @@ public class insertUserMess extends HttpServlet {
 		FrontDao dao=new FrontDao();
 		String flag=dao.register(user);
 		PrintWriter out=response.getWriter();
-		if(flag.equals("³É¹¦"))out.print("success");
+		if(flag.equals("æˆåŠŸ"))out.print("success");
 		else out.print("failed");
 	}
 

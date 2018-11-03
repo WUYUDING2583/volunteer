@@ -17,7 +17,7 @@ import volunteer.modal.Admin;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String LOGIN_WRONGMSG = "用户名或密码错误";
+	private static final String LOGIN_WRONGMSG = "鐢ㄦ埛鍚嶆垨瀵嗙爜閿欒";
        
     /**
      * @see HttpServlet#HttpServlet()

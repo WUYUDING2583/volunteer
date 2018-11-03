@@ -52,30 +52,30 @@ public class exportList extends HttpServlet {
 		//PrintWriter out=response.getWriter();
 		AdminDao dao=new AdminDao();
 		ArrayList<User> list=dao.getApplyList(Ano);
-		//ĞÂ½¨excel±¨±í
+		//æ–°å»ºexcelæŠ¥è¡¨
 	    HSSFWorkbook excel = new HSSFWorkbook();
-	    //Ìí¼ÓÒ»¸ösheet
-	    HSSFSheet hssfSheet = excel.createSheet("Ãûµ¥");
-	    //Íùexcel±í¸ñ´´½¨Ò»ĞĞ£¬excelµÄĞĞºÅÊÇ´Ó0¿ªÊ¼µÄ
-	    // ÉèÖÃ±íÍ·
+	    //æ·»åŠ ä¸€ä¸ªsheet
+	    HSSFSheet hssfSheet = excel.createSheet("åå•");
+	    //å¾€excelè¡¨æ ¼åˆ›å»ºä¸€è¡Œï¼Œexcelçš„è¡Œå·æ˜¯ä»0å¼€å§‹çš„
+	    // è®¾ç½®è¡¨å¤´
 	    HSSFRow firstRow = hssfSheet.createRow(0);
-	    //´´½¨µ¥Ôª¸ñ
+	    //åˆ›å»ºå•å…ƒæ ¼
         HSSFCell hssfCell = firstRow.createCell(0);
-        hssfCell.setCellValue("ĞÕÃû");
+        hssfCell.setCellValue("å§“å");
         hssfCell = firstRow.createCell(1);
-        hssfCell.setCellValue("ĞÔ±ğ");
+        hssfCell.setCellValue("æ€§åˆ«");
         hssfCell = firstRow.createCell(2);
-        hssfCell.setCellValue("Ñ§ºÅ");
+        hssfCell.setCellValue("å­¦å·");
         hssfCell = firstRow.createCell(3);
-        hssfCell.setCellValue("Ñ§Ôº°à¼¶");
+        hssfCell.setCellValue("å­¦é™¢ç­çº§");
         hssfCell = firstRow.createCell(4);
-        hssfCell.setCellValue("Ö¾Ô¸ÕßºÅ");
+        hssfCell.setCellValue("å¿—æ„¿è€…å·");
         hssfCell = firstRow.createCell(5);
-        hssfCell.setCellValue("µç»°");
+        hssfCell.setCellValue("ç”µè¯");
         hssfCell = firstRow.createCell(6);
-        hssfCell.setCellValue("Ê±¼ä¶Î");
+        hssfCell.setCellValue("æ—¶é—´æ®µ");
         hssfCell = firstRow.createCell(7);
-        hssfCell.setCellValue("¸ÚÎ»");
+        hssfCell.setCellValue("å²—ä½");
         for(int row=0;row<list.size();row++) {
         	HSSFRow hssfRow = hssfSheet.createRow(row + 1);
         	HSSFCell cell = hssfRow.createCell(0);
@@ -95,11 +95,11 @@ public class exportList extends HttpServlet {
             cell = hssfRow.createCell(7);
             cell.setCellValue(list.get(row).getAjobstate());
     	}
-        OutputStream outputStream = response.getOutputStream();// ´ò¿ªÁ÷
-        excel.write(outputStream);// HSSFWorkbookĞ´ÈëÁ÷
-        excel.close();// HSSFWorkbook¹Ø±Õ
-        outputStream.flush();// Ë¢ĞÂÁ÷
-        outputStream.close();// ¹Ø±ÕÁ÷
+        OutputStream outputStream = response.getOutputStream();// æ‰“å¼€æµ
+        excel.write(outputStream);// HSSFWorkbookå†™å…¥æµ
+        excel.close();// HSSFWorkbookå…³é—­
+        outputStream.flush();// åˆ·æ–°æµ
+        outputStream.close();// å…³é—­æµ
 	}
 
 	/**

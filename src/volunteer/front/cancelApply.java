@@ -36,7 +36,7 @@ public class cancelApply extends HttpServlet {
 			 try {
 				result=dao.getApply(No);
 			} catch (SQLException | ParseException e) {
-				// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+				// TODO è‡ªåŠ¨ç”Ÿæˆçš„ catch å—
 				e.printStackTrace();
 			}
 		}

@@ -88,6 +88,6 @@
 		});
 	});
 	</script>
-	<%session.removeAttribute("wrongMsg"); %>
+	<% session.removeAttribute("wrongMsg"); %>
 </body>
 </html>

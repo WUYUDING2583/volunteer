@@ -10,7 +10,7 @@ public class TokenThread implements Runnable{
 	    public static  String secret;
 
 	public TokenThread() {
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êı´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ„é€ å‡½æ•°å­˜æ ¹
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class TokenThread implements Runnable{
 				JSONObject access_token=new JSONObject(getAT.getAcessToken(appid, secret));
 				if(access_token!=null)
 				{
-					System.out.println("Access_Token»ñÈ¡³É¹¦:"+access_token.getString("access_token"));
+					System.out.println("Access_Tokenè·å–æˆåŠŸ:"+access_token.getString("access_token"));
 					int expires=access_token.getInt("expires_in");
 					Thread.sleep((expires-200) * 1000);
 				}

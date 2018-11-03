@@ -37,77 +37,77 @@ import volunteer.modal.User;
 
 public class AdminDao extends BaseDao{
 	
-	private static final String LOGIN_WRONGMSG = "ÓÃ»§Ãû»òÃÜÂë´íÎó";
-	 // ÉÏ´«ÎÄ¼ş´æ´¢Ä¿Â¼
+	private static final String LOGIN_WRONGMSG = "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯";
+	 // ä¸Šä¼ æ–‡ä»¶å­˜å‚¨ç›®å½•
     private static final String UPLOAD_DIRECTORY = "upload";
     private static final String PICTURE_DIRECTORY = "picture";
  
-    // ÉÏ´«ÅäÖÃ
+    // ä¸Šä¼ é…ç½®
     private static final int MEMORY_THRESHOLD   = 1024 * 1024 * 3;  // 3MB
     private static final int MAX_FILE_SIZE      = 1024 * 1024 * 40; // 40MB
     private static final int MAX_REQUEST_SIZE   = 1024 * 1024 * 50; // 50MB
 
 	private XSSFCell Ttel;
 	
-	//ÎÄ¼şÉÏ´«´¦Àí·½·¨
+	//æ–‡ä»¶ä¸Šä¼ å¤„ç†æ–¹æ³•
 		public File fileUpload(HttpServletRequest request,HttpServletResponse response,String path) throws FileUploadException {
-			 // ¼ì²âÊÇ·ñÎª¶àÃ½ÌåÉÏ´«
+			 // æ£€æµ‹æ˜¯å¦ä¸ºå¤šåª’ä½“ä¸Šä¼ 
 	        if (!ServletFileUpload.isMultipartContent(request)) {
-	            // Èç¹û²»ÊÇÔòÍ£Ö¹
+	            // å¦‚æœä¸æ˜¯åˆ™åœæ­¢
 	           
 	            return null;
 	        }
 	 
-	        // ÅäÖÃÉÏ´«²ÎÊı
+	        // é…ç½®ä¸Šä¼ å‚æ•°
 	        DiskFileItemFactory factory = new DiskFileItemFactory();
-	        // ÉèÖÃÄÚ´æÁÙ½çÖµ - ³¬¹ıºó½«²úÉúÁÙÊ±ÎÄ¼ş²¢´æ´¢ÓÚÁÙÊ±Ä¿Â¼ÖĞ
+	        // è®¾ç½®å†…å­˜ä¸´ç•Œå€¼ - è¶…è¿‡åå°†äº§ç”Ÿä¸´æ—¶æ–‡ä»¶å¹¶å­˜å‚¨äºä¸´æ—¶ç›®å½•ä¸­
 	        factory.setSizeThreshold(MEMORY_THRESHOLD);
-	        // ÉèÖÃÁÙÊ±´æ´¢Ä¿Â¼
+	        // è®¾ç½®ä¸´æ—¶å­˜å‚¨ç›®å½•
 	        factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
 	 
 	        ServletFileUpload upload = new ServletFileUpload(factory);
 	         
-	        // ÉèÖÃ×î´óÎÄ¼şÉÏ´«Öµ
+	        // è®¾ç½®æœ€å¤§æ–‡ä»¶ä¸Šä¼ å€¼
 	        upload.setFileSizeMax(MAX_FILE_SIZE);
 	         
-	        // ÉèÖÃ×î´óÇëÇóÖµ (°üº¬ÎÄ¼şºÍ±íµ¥Êı¾İ)
+	        // è®¾ç½®æœ€å¤§è¯·æ±‚å€¼ (åŒ…å«æ–‡ä»¶å’Œè¡¨å•æ•°æ®)
 	        upload.setSizeMax(MAX_REQUEST_SIZE);
 	        
-	        // ÖĞÎÄ´¦Àí
+	        // ä¸­æ–‡å¤„ç†
 	        upload.setHeaderEncoding("UTF-8"); 
 
-	        // ¹¹ÔìÁÙÊ±Â·¾¶À´´æ´¢ÉÏ´«µÄÎÄ¼ş
-	        // Õâ¸öÂ·¾¶Ïà¶Ôµ±Ç°Ó¦ÓÃµÄÄ¿Â¼
+	        // æ„é€ ä¸´æ—¶è·¯å¾„æ¥å­˜å‚¨ä¸Šä¼ çš„æ–‡ä»¶
+	        // è¿™ä¸ªè·¯å¾„ç›¸å¯¹å½“å‰åº”ç”¨çš„ç›®å½•
 	        String uploadPath = path+ UPLOAD_DIRECTORY;
 	        String pa="www.jsjzx.top/Volunteer"+ UPLOAD_DIRECTORY;
 	        File storeFile=null;
 	         
-	        // Èç¹ûÄ¿Â¼²»´æÔÚÔò´´½¨
+	        // å¦‚æœç›®å½•ä¸å­˜åœ¨åˆ™åˆ›å»º
 	        File uploadDir = new File(uploadPath);
 	        if (!uploadDir.exists()) {
 	            uploadDir.mkdir();
 	        }
 	 
 	        try {
-	            // ½âÎöÇëÇóµÄÄÚÈİÌáÈ¡ÎÄ¼şÊı¾İ
+	            // è§£æè¯·æ±‚çš„å†…å®¹æå–æ–‡ä»¶æ•°æ®
 	            @SuppressWarnings("unchecked")
 	            List<FileItem> formItems = upload.parseRequest(request);
 	 
 	            if (formItems != null && formItems.size() > 0) {
-	                // µü´ú±íµ¥Êı¾İ
+	                // è¿­ä»£è¡¨å•æ•°æ®
 	                for (FileItem item : formItems) {
-	                    // ´¦Àí²»ÔÚ±íµ¥ÖĞµÄ×Ö¶Î
+	                    // å¤„ç†ä¸åœ¨è¡¨å•ä¸­çš„å­—æ®µ
 	                    if (!item.isFormField()) {
 	                        String fileName = new File(item.getName()).getName();
 	                        String filePath = uploadPath + File.separator + fileName;
 	                        pa+=File.separator + fileName;
 	                        storeFile = new File(filePath);
-	                        // ÔÚ¿ØÖÆÌ¨Êä³öÎÄ¼şµÄÉÏ´«Â·¾¶
+	                        // åœ¨æ§åˆ¶å°è¾“å‡ºæ–‡ä»¶çš„ä¸Šä¼ è·¯å¾„
 	                        System.out.println(filePath);
-	                        // ±£´æÎÄ¼şµ½Ó²ÅÌ
+	                        // ä¿å­˜æ–‡ä»¶åˆ°ç¡¬ç›˜
 	                        item.write(storeFile);
 	                        request.getSession().setAttribute("uploadMessage",
-	                            "ÎÄ¼şÉÏ´«³É¹¦!");
+	                            "æ–‡ä»¶ä¸Šä¼ æˆåŠŸ!");
 	                    }
 	                }
 	            }
@@ -119,11 +119,11 @@ public class AdminDao extends BaseDao{
 	        return storeFile;
 		}
 		
-		//¹¤Ê±Êı¾İÉÏ´«
+		//å·¥æ—¶æ•°æ®ä¸Šä¼ 
 		public int vtimeUpload(File file) {
 			XSSFCell No,Aname,Adate,vtime,count;
 			XSSFRow row;
-			//»ñµÃ±íµ¥ĞÅÏ¢
+			//è·å¾—è¡¨å•ä¿¡æ¯
 			XSSFWorkbook wb0=null;
 			String message=null;
 			ArrayList<User> list=new ArrayList<User>();
@@ -192,39 +192,39 @@ public class AdminDao extends BaseDao{
 			}
 		}
 		
-	//Í¼Æ¬ÉÏ´«´¦Àí·½·¨
+	//å›¾ç‰‡ä¸Šä¼ å¤„ç†æ–¹æ³•
 	public String pictureUpload(HttpServletRequest request,HttpServletResponse response,String path) throws FileUploadException {
-		 // ¼ì²âÊÇ·ñÎª¶àÃ½ÌåÉÏ´«
+		 // æ£€æµ‹æ˜¯å¦ä¸ºå¤šåª’ä½“ä¸Šä¼ 
         if (!ServletFileUpload.isMultipartContent(request)) {
-            // Èç¹û²»ÊÇÔòÍ£Ö¹
+            // å¦‚æœä¸æ˜¯åˆ™åœæ­¢
             return null;
         }
         String message=null;
-        // ÅäÖÃÉÏ´«²ÎÊı
+        // é…ç½®ä¸Šä¼ å‚æ•°
         DiskFileItemFactory factory = new DiskFileItemFactory();
-        // ÉèÖÃÄÚ´æÁÙ½çÖµ - ³¬¹ıºó½«²úÉúÁÙÊ±ÎÄ¼ş²¢´æ´¢ÓÚÁÙÊ±Ä¿Â¼ÖĞ
+        // è®¾ç½®å†…å­˜ä¸´ç•Œå€¼ - è¶…è¿‡åå°†äº§ç”Ÿä¸´æ—¶æ–‡ä»¶å¹¶å­˜å‚¨äºä¸´æ—¶ç›®å½•ä¸­
         factory.setSizeThreshold(MEMORY_THRESHOLD);
-        // ÉèÖÃÁÙÊ±´æ´¢Ä¿Â¼
+        // è®¾ç½®ä¸´æ—¶å­˜å‚¨ç›®å½•
         factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
  
         ServletFileUpload upload = new ServletFileUpload(factory);
          
-        // ÉèÖÃ×î´óÎÄ¼şÉÏ´«Öµ
+        // è®¾ç½®æœ€å¤§æ–‡ä»¶ä¸Šä¼ å€¼
         upload.setFileSizeMax(MAX_FILE_SIZE);
          
-        // ÉèÖÃ×î´óÇëÇóÖµ (°üº¬ÎÄ¼şºÍ±íµ¥Êı¾İ)
+        // è®¾ç½®æœ€å¤§è¯·æ±‚å€¼ (åŒ…å«æ–‡ä»¶å’Œè¡¨å•æ•°æ®)
         upload.setSizeMax(MAX_REQUEST_SIZE);
         
-        // ÖĞÎÄ´¦Àí
+        // ä¸­æ–‡å¤„ç†
         upload.setHeaderEncoding("UTF-8"); 
-        // ¹¹ÔìÁÙÊ±Â·¾¶À´´æ´¢ÉÏ´«µÄÎÄ¼ş
-        // Õâ¸öÂ·¾¶Ïà¶Ôµ±Ç°Ó¦ÓÃµÄÄ¿Â¼
+        // æ„é€ ä¸´æ—¶è·¯å¾„æ¥å­˜å‚¨ä¸Šä¼ çš„æ–‡ä»¶
+        // è¿™ä¸ªè·¯å¾„ç›¸å¯¹å½“å‰åº”ç”¨çš„ç›®å½•
         int length=path.length();
         String Path=path.substring(0, length-1);
         
         String temp_str="";   
 	    java.util.Date dt = new java.util.Date();   
-	    //×îºóµÄaa±íÊ¾¡°ÉÏÎç¡±»ò¡°ÏÂÎç¡±    HH±íÊ¾24Ğ¡Ê±ÖÆ    Èç¹û»»³Éhh±íÊ¾12Ğ¡Ê±ÖÆ   
+	    //æœ€åçš„aaè¡¨ç¤ºâ€œä¸Šåˆâ€æˆ–â€œä¸‹åˆâ€    HHè¡¨ç¤º24å°æ—¶åˆ¶    å¦‚æœæ¢æˆhhè¡¨ç¤º12å°æ—¶åˆ¶   
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
 	    temp_str=sdf.format(dt); 
 	    
@@ -233,7 +233,7 @@ public class AdminDao extends BaseDao{
         System.out.println(uploadPath);
         File storeFile=null;
          
-        // Èç¹ûÄ¿Â¼²»´æÔÚÔò´´½¨
+        // å¦‚æœç›®å½•ä¸å­˜åœ¨åˆ™åˆ›å»º
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
@@ -241,29 +241,29 @@ public class AdminDao extends BaseDao{
         
         uploadPath += temp_str;
         pa+= temp_str;
-     // Èç¹ûÄ¿Â¼²»´æÔÚÔò´´½¨
+     // å¦‚æœç›®å½•ä¸å­˜åœ¨åˆ™åˆ›å»º
         uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
         }
         try {
-            // ½âÎöÇëÇóµÄÄÚÈİÌáÈ¡ÎÄ¼şÊı¾İ
+            // è§£æè¯·æ±‚çš„å†…å®¹æå–æ–‡ä»¶æ•°æ®
             @SuppressWarnings("unchecked")
             List<FileItem> formItems = upload.parseRequest(request);
  
             if (formItems != null && formItems.size() > 0) {
-                // µü´ú±íµ¥Êı¾İ
+                // è¿­ä»£è¡¨å•æ•°æ®
                 for (FileItem item : formItems) {
-                    // ´¦Àí²»ÔÚ±íµ¥ÖĞµÄ×Ö¶Î
+                    // å¤„ç†ä¸åœ¨è¡¨å•ä¸­çš„å­—æ®µ
                     if (!item.isFormField()) {
                         String fileName = new File(item.getName()).getName();
                         String filePath = uploadPath + "/" + fileName;
                         pa+= "/" + fileName;
                         storeFile = new File(filePath);
-                        // ÔÚ¿ØÖÆÌ¨Êä³öÎÄ¼şµÄÉÏ´«Â·¾¶
+                        // åœ¨æ§åˆ¶å°è¾“å‡ºæ–‡ä»¶çš„ä¸Šä¼ è·¯å¾„
                         System.out.println(pa);
                         message=pa;
-                        // ±£´æÎÄ¼şµ½Ó²ÅÌ
+                        // ä¿å­˜æ–‡ä»¶åˆ°ç¡¬ç›˜
                         item.write(storeFile);
                     }
                 }
@@ -275,27 +275,27 @@ public class AdminDao extends BaseDao{
         
         return message;
 	}
-	//²úÉú10Î»Ëæ»ú×Ö·û´®
+	//äº§ç”Ÿ10ä½éšæœºå­—ç¬¦ä¸²
 	public String getRandomString(){
-	    //¶¨ÒåÒ»¸ö×Ö·û´®£¨A-Z£¬a-z£¬0-9£©¼´62Î»£»
+	    //å®šä¹‰ä¸€ä¸ªå­—ç¬¦ä¸²ï¼ˆA-Zï¼Œa-zï¼Œ0-9ï¼‰å³62ä½ï¼›
 	    String str="zxcvbnmlkjhgfdsaqwertyuiopQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
-	    //ÓÉRandomÉú³ÉËæ»úÊı
+	    //ç”±Randomç”Ÿæˆéšæœºæ•°
 	        Random random=new Random();  
 	        StringBuffer sb=new StringBuffer();
-	        //³¤¶ÈÎª¼¸¾ÍÑ­»·¼¸´Î
+	        //é•¿åº¦ä¸ºå‡ å°±å¾ªç¯å‡ æ¬¡
 	        for(int i=0; i<10; ++i){
-	          //²úÉú0-61µÄÊı×Ö
+	          //äº§ç”Ÿ0-61çš„æ•°å­—
 	          int number=random.nextInt(62);
-	          //½«²úÉúµÄÊı×ÖÍ¨¹ılength´Î³ĞÔØµ½sbÖĞ
+	          //å°†äº§ç”Ÿçš„æ•°å­—é€šè¿‡lengthæ¬¡æ‰¿è½½åˆ°sbä¸­
 	          sb.append(str.charAt(number));
 	        }
-	        //½«³ĞÔØµÄ×Ö·û×ª»»³É×Ö·û´®
+	        //å°†æ‰¿è½½çš„å­—ç¬¦è½¬æ¢æˆå­—ç¬¦ä¸²
 	        return sb.toString();
 	  }
 	
-	//Ìí¼Ó»î¶¯
+	//æ·»åŠ æ´»åŠ¨
 	public String addActivity(ActInfo info,ArrayList<ActReq> reqList) {
-		String sql="insert into ActivityInfo values(?,?,?,?,?,?,?,?,?,?,'Õã½­¹¤Òµ´óÑ§',0,?,?);";
+		String sql="insert into ActivityInfo values(?,?,?,?,?,?,?,?,?,?,'æµ™æ±Ÿå·¥ä¸šå¤§å­¦',0,?,?);";
 		String message=null;
 		int result=0;
 		try {
@@ -326,21 +326,21 @@ public class AdminDao extends BaseDao{
 				result+=pstmt.executeUpdate();
 			}
 			if(result>0) {
-				message="Ìí¼Ó³É¹¦";
+				message="æ·»åŠ æˆåŠŸ";
 			}
 			else
-				message="Ìí¼ÓÊ§°Ü";
+				message="æ·»åŠ å¤±è´¥";
 			pstmt.close();
 			conn.close();
 		}catch(SQLException se)
 		{
 			se.printStackTrace();
-			message="Ìí¼ÓÊ§°Ü";
+			message="æ·»åŠ å¤±è´¥";
 		}
 		return message;
 	}
 	
-	//»ñµÃËùÓĞÖ¾Ô¸»î¶¯ÁĞ±í
+	//è·å¾—æ‰€æœ‰å¿—æ„¿æ´»åŠ¨åˆ—è¡¨
 	public ArrayList<ActInfo> getActInfoList(Admin admin){
 		String sql="select * from ActivityInfo where college=?";
 		ArrayList<ActInfo> infoList=new ArrayList<ActInfo>();
@@ -358,15 +358,15 @@ public class AdminDao extends BaseDao{
 				java.util.Date now = new java.util.Date(); 
 				temp_str=sdf.format(now); 
 				if(date.equals(temp_str)) {
-					info.setAstate("½øĞĞÖĞ");
+					info.setAstate("è¿›è¡Œä¸­");
 				}
 				else if(now.before(acttime)) {
-					info.setAstate("Î´¿ªÊ¼");
+					info.setAstate("æœªå¼€å§‹");
 				}
 				else if(now.after(acttime)) {
-					info.setAstate("ÒÑ½áÊø");
+					info.setAstate("å·²ç»“æŸ");
 				}
-				//×îºóµÄaa±íÊ¾¡°ÉÏÎç¡±»ò¡°ÏÂÎç¡±    HH±íÊ¾24Ğ¡Ê±ÖÆ    Èç¹û»»³Éhh±íÊ¾12Ğ¡Ê±ÖÆ ;
+				//æœ€åçš„aaè¡¨ç¤ºâ€œä¸Šåˆâ€æˆ–â€œä¸‹åˆâ€    HHè¡¨ç¤º24å°æ—¶åˆ¶    å¦‚æœæ¢æˆhhè¡¨ç¤º12å°æ—¶åˆ¶ ;
 				info.setState(rst.getInt("state"));
 				info.setAno(rst.getString("Ano").trim());
 				info.setAname(rst.getString("Aname").trim());
@@ -393,7 +393,7 @@ public class AdminDao extends BaseDao{
 		}
 	}
 	
-	//²éÕÒ»î¶¯ĞÅÏ¢
+	//æŸ¥æ‰¾æ´»åŠ¨ä¿¡æ¯
 	public ActInfo getActInfo(String Ano) {
 		ActInfo info=new ActInfo();
 		String sql="select * from ActivityInfo where Ano=?";
@@ -423,7 +423,7 @@ public class AdminDao extends BaseDao{
 		} 
 	}
 	
-	//²éÕÒ»î¶¯ÒªÇó
+	//æŸ¥æ‰¾æ´»åŠ¨è¦æ±‚
 	public ArrayList<ActReq> getActReq(String Ano){
 		ArrayList<ActReq> reqList=new ArrayList<ActReq>();
 		String sql="select * from ActivityRequest where Ano=?";
@@ -451,7 +451,7 @@ public class AdminDao extends BaseDao{
 		} 
 	}
 	
-	//É¾³ı»î¶¯
+	//åˆ é™¤æ´»åŠ¨
 	public int deleteActivity(String Ano) {
 		String sql="delete from ActivityInfo where Ano=?;delete from ActivityRequest where Ano=?;delete from Apply where Ano=?;";
 		int count=0;
@@ -472,7 +472,7 @@ public class AdminDao extends BaseDao{
 		} 
 	}
 	
-	//·µ»Ø»î¶¯±¨ÃûÃûµ¥
+	//è¿”å›æ´»åŠ¨æŠ¥ååå•
 	public ArrayList<User> getApplyList(String Ano){
 		String sql="select * from Apply where Ano=?;";
 		ArrayList<User> applyList=new ArrayList<User>();
@@ -512,7 +512,7 @@ public class AdminDao extends BaseDao{
 		} 
 	}
 	
-	//ÉèÖÃÒÑ¾­ÉÏ´«¹¤Ê±
+	//è®¾ç½®å·²ç»ä¸Šä¼ å·¥æ—¶
 	public int setState(String Ano) {
 		String sql="update ActivityInfo set state=1 where Ano=?;";
 		int count=0;
@@ -531,7 +531,7 @@ public class AdminDao extends BaseDao{
 		} 
 	}
 	
-	//·µ»Ø¹¤Ê±ĞÅÏ¢
+	//è¿”å›å·¥æ—¶ä¿¡æ¯
 	public ArrayList<User> getVtimeInfo(String Aname,String Adate){
 		String sql="select * from Vtime where Aname=? and Adate=?;";
 		ArrayList<User> list=new ArrayList<User>();
@@ -568,7 +568,7 @@ public class AdminDao extends BaseDao{
 		} 
 	}
 	
-	//É¾³ı¹¤Ê±¼ÇÂ¼
+	//åˆ é™¤å·¥æ—¶è®°å½•
 	public int deleteVtime(String Aname,String Adate,String No) {
 		String sql="delete from Vtime where Aname=? and Adate=? and No=?;";
 		int count=0;
@@ -591,7 +591,7 @@ public class AdminDao extends BaseDao{
 		} 
 	}
 	
-	//ĞŞ¸Ä¹¤Ê±¼ÇÂ¼
+	//ä¿®æ”¹å·¥æ—¶è®°å½•
 	public int alterVtime(String Aname,String Adate,String No,float vtime) {
 		String sql="update Vtime set Avtime=? where Aname=? and Adate=? and No=?;";
 		int count=0;
@@ -614,7 +614,7 @@ public class AdminDao extends BaseDao{
 		} 
 	}
 	
-	//Ìí¼Ó¹¤Ê±¼ÇÂ¼
+	//æ·»åŠ å·¥æ—¶è®°å½•
 	public String addVtime(String Aname,String Adate,String No,float Avtime) {
 		String sql="insert into Vtime values(?,?,?,?);";
 		int count=0;
@@ -647,7 +647,7 @@ public class AdminDao extends BaseDao{
 		} 
 	}
 	
-	//¸ù¾İÑ§ºÅ²é¹¤Ê±
+	//æ ¹æ®å­¦å·æŸ¥å·¥æ—¶
 	public ArrayList<User> VtimeSearch(String No){
 		String sql="select * from Vtime where No=?;";
 		ArrayList<User> list=new ArrayList<User>();
@@ -682,7 +682,7 @@ public class AdminDao extends BaseDao{
 		} 
 	}
 	
-	//µÇÂ½
+	//ç™»é™†
 	public Admin login(Admin admin) {
 		String sql="select * from Admin where account=?;";
 		Admin ad=new Admin();
@@ -713,7 +713,7 @@ public class AdminDao extends BaseDao{
 		} 
 	}
 	
-	//ĞŞ¸ÄÃÜÂë
+	//ä¿®æ”¹å¯†ç 
 	public String changePsw(Admin admin) {
 		String sql="update Admin set password=? where id=?;";
 		String message=null;
@@ -737,7 +737,7 @@ public class AdminDao extends BaseDao{
 		} 
 	}
 	
-	//»ñÈ¡Ç©µ½Ç©ÍËÇé¿ö
+	//è·å–ç­¾åˆ°ç­¾é€€æƒ…å†µ
 	public ArrayList<User> getSign(String Ano){
 		String sql="select * from Apply where Ano=?;";
 		ArrayList<User> list=new ArrayList<User>();

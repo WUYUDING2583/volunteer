@@ -7,7 +7,7 @@ public class Admin  implements Serializable{
 	private String password;
 	private String college;
 	private String id;
-	private String org;//×éÖ¯
+	private String org;//ç»„ç»‡
 	
 	public Admin() {}
 	

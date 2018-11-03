@@ -34,7 +34,7 @@ public class isRegister extends HttpServlet
 				{out.print(dao.isRegister(openid));}
 		} catch (SQLException e) 
 		{
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO è‡ªåŠ¨ç”Ÿæˆçš„ catch å—
 			e.printStackTrace();
 		}
 	}

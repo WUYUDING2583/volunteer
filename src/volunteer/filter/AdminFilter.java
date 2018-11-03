@@ -46,20 +46,20 @@ public class AdminFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		//»ñÈ¡¸Ã¹ıÂËÆ÷µÄÅäÖÃ²ÎÊı
+		//è·å–è¯¥è¿‡æ»¤å™¨çš„é…ç½®å‚æ•°
 				String encoding=config.getInitParameter("encoding");
 				String loginPage=config.getInitParameter("loginPage");
 				String proLogin=config.getInitParameter("proLogin");
-				//ÉèÖÃÇëÇórequestµÄ±àÂë×Ö·û¼¯
+				//è®¾ç½®è¯·æ±‚requestçš„ç¼–ç å­—ç¬¦é›†
 				request.setCharacterEncoding(encoding);
 				HttpServletRequest hrequest=(HttpServletRequest)request;
 				HttpSession session=hrequest.getSession(true);
-				//»ñµÃÓÃ»§ÇëÇóÒ³Ãæ
+				//è·å¾—ç”¨æˆ·è¯·æ±‚é¡µé¢
 				String requestPath=hrequest.getServletPath();
-				//Èç¹ûsession×÷ÓÃÓòµÄStudentÎªnull£¬±íÊ¾Ã»ÓĞµÇÂ½
-				//Èç¹ûÓÃ»§ÇëÇóµÄÒ³Ãæ²»ÊÇµÇÂ½Ò³Ãæ
+				//å¦‚æœsessionä½œç”¨åŸŸçš„Studentä¸ºnullï¼Œè¡¨ç¤ºæ²¡æœ‰ç™»é™†
+				//å¦‚æœç”¨æˆ·è¯·æ±‚çš„é¡µé¢ä¸æ˜¯ç™»é™†é¡µé¢
 				if(session.getAttribute("Admin")==null&&!requestPath.equals(loginPage)&&!requestPath.equals(proLogin)) {
-					//×ª·¢µ½µÇÂ½Ò³Ãæ
+					//è½¬å‘åˆ°ç™»é™†é¡µé¢
 					request.getRequestDispatcher(loginPage).forward(request, response);
 				}
 				else {

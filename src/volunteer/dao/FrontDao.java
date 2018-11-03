@@ -33,7 +33,7 @@ public class FrontDao extends BaseDao {
 		this.openid = openid;
 	}
 
-	// »ñµÃËùÓĞÖ¾Ô¸»î¶¯ÁĞ±í
+	// è·å¾—æ‰€æœ‰å¿—æ„¿æ´»åŠ¨åˆ—è¡¨
 	public ArrayList<ActInfo> getActInfoList(String flag) {
 		String sql = "select Ano,Aname,Adate,Address,publishTime,Arequest,picture,Adeadline from ActivityInfo group by Ano,Aname,publishTime,Adate,Address,Arequest,picture,Adeadline";
 		ArrayList<ActInfo> infoList = new ArrayList<ActInfo>();
@@ -50,13 +50,13 @@ public class FrontDao extends BaseDao {
 				java.util.Date now = new java.util.Date();
 				temp_str = sdf.format(now);
 				if (now.before(acttime)) {
-					info.setAstate("ÕıÔÚ±¨Ãû");
+					info.setAstate("æ­£åœ¨æŠ¥å");
 				} else if (now.after(acttime)) {
-					info.setAstate("±¨Ãû½ØÖ¹");
+					info.setAstate("æŠ¥åæˆªæ­¢");
 				}
-				// ×îºóµÄaa±íÊ¾¡°ÉÏÎç¡±»ò¡°ÏÂÎç¡± HH±íÊ¾24Ğ¡Ê±ÖÆ Èç¹û»»³Éhh±íÊ¾12Ğ¡Ê±ÖÆ ;
+				// æœ€åçš„aaè¡¨ç¤ºâ€œä¸Šåˆâ€æˆ–â€œä¸‹åˆâ€ HHè¡¨ç¤º24å°æ—¶åˆ¶ å¦‚æœæ¢æˆhhè¡¨ç¤º12å°æ—¶åˆ¶ ;
 				if (flag.equals("new")) {
-					if (info.getAstate().equals("ÕıÔÚ±¨Ãû")) {
+					if (info.getAstate().equals("æ­£åœ¨æŠ¥å")) {
 						info.setAno(rst.getString("Ano").trim());
 						info.setAname(rst.getString("Aname").trim());
 						info.setAdate(rst.getString("Adate"));
@@ -69,7 +69,7 @@ public class FrontDao extends BaseDao {
 					}
 				}
 				if (flag.equals("history")) {
-					if (info.getAstate().equals("±¨Ãû½ØÖ¹")) {
+					if (info.getAstate().equals("æŠ¥åæˆªæ­¢")) {
 						info.setAno(rst.getString("Ano").trim());
 						info.setAname(rst.getString("Aname").trim());
 						info.setAdate(rst.getString("Adate"));
@@ -95,7 +95,7 @@ public class FrontDao extends BaseDao {
 		}
 	}
 
-	// ´æÈëÓÃ»§±êÊ¶
+	// å­˜å…¥ç”¨æˆ·æ ‡è¯†
 	/*
 	 * public int setOpenId(String openid,String No) throws SQLException { String
 	 * sql=" update Account set openid=? where No=?"; Connection conn =
@@ -104,7 +104,7 @@ public class FrontDao extends BaseDao {
 	 * No); int result=pstmt.executeUpdate(); conn.close(); pstmt.close(); return
 	 * result; }
 	 */
-	// ÅĞ¶ÏÓÃ»§ÊÇ·ñ×¢²á¹ı
+	// åˆ¤æ–­ç”¨æˆ·æ˜¯å¦æ³¨å†Œè¿‡
 	public String isRegister(String openid) throws SQLException {
 		FrontDao.openid = openid;
 		String sql = "select No from Account where openid=?";
@@ -127,7 +127,7 @@ public class FrontDao extends BaseDao {
 		}
 		return result;
 	}
-	//·¢ËÍ±¨Ãû³É¹¦ĞÅÏ¢
+	//å‘é€æŠ¥åæˆåŠŸä¿¡æ¯
 	public int sendMessage(JSONObject identify,String Aname,String Address,String Adate,String formId)
 	{
 		 URL connect;
@@ -142,7 +142,7 @@ public class FrontDao extends BaseDao {
             connection.setRequestMethod("POST");  
             connection.setDoOutput(true); 
             connection.setDoInput(true);
-            connection.setUseCaches(false);//post²»ÄÜÊ¹ÓÃ»º´æ
+            connection.setUseCaches(false);//postä¸èƒ½ä½¿ç”¨ç¼“å­˜
             connection.setInstanceFollowRedirects(true);
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
@@ -170,7 +170,7 @@ public class FrontDao extends BaseDao {
             dataP.put("keyword3", keyword3);
             paramsStr.put("data", dataP);
             paramsStr.put("emphasis_keyword" ,"keyword1.DATA");
-            //Æ´½ÓPost ÇëÇóµÄ²ÎÊı
+            //æ‹¼æ¥Post è¯·æ±‚çš„å‚æ•°
             paramout.write(paramsStr.toString()); 
             System.out.println("Data:"+dataP.toString());
             System.out.println("ALL:"+paramsStr.toString());
@@ -192,7 +192,7 @@ public class FrontDao extends BaseDao {
       return o.getInt("errcode"); 
 
 	}
-	// ·µ»ØÓÃ»§openid¼°access_token
+	// è¿”å›ç”¨æˆ·openidåŠaccess_token
 	public JSONObject returnIdentify(String No) throws IOException, SQLException {
 		JSONObject json = new JSONObject();String access_token = null;
 		BufferedReader buf = new BufferedReader(new FileReader("C:\\Program Files\\Apache Software Foundation\\Tomcat 8.5\\webapps\\Volunteer\\access_token.txt"));
@@ -216,7 +216,7 @@ public class FrontDao extends BaseDao {
 		return json;
 	}
 
-	// »ñÈ¡»î¶¯ÏêÏ¸Çé¿ö
+	// è·å–æ´»åŠ¨è¯¦ç»†æƒ…å†µ
 	public String getActivityDetail(String Aname, String Ano, String Adeadline) {
 		String sql = "select Aname,Adate,Address,Arequest from ActivityInfo where Aname=? and Adeadline=? and Ano=? ;";
 		String sql1 = "select Atime from ActivityRequest where Ano=? group by Atime;";
@@ -336,7 +336,7 @@ public class FrontDao extends BaseDao {
 		rst.close();
 		return result;
 	}
-	// ±¨Ãû
+	// æŠ¥å
 	public String apply(String No, String Ano, String Aname, String Ajobstate, String Atime,String Address,String Adate,String formId) throws SQLException {
 		User user = getUserInfo(No);
 		System.out.println("NAME:" + user.getName());
@@ -366,7 +366,7 @@ public class FrontDao extends BaseDao {
 				if (count > 0) {
 					sql = "update ActivityRequest  set DoneAccount=DoneAccount+1 where Ano=? and Atime=? and Ajobstate=?;";
 					pstmt = conn.prepareStatement(sql);
-					// ¹Ø±Õ×Ô¶¯Ìá½»£¬¿ªÆôÊÂÎñ
+					// å…³é—­è‡ªåŠ¨æäº¤ï¼Œå¼€å¯äº‹åŠ¡
 					// conn.setAutoCommit(false);
 					pstmt.setString(1, Ano);
 					pstmt.setString(2, Atime);
@@ -388,14 +388,14 @@ public class FrontDao extends BaseDao {
 					}
 					System.out.println("sendMessage success:"+resultOfS+" N:"+n);
 				}
-				// ÊÂÎñ³É¹¦Ìá½»
+				// äº‹åŠ¡æˆåŠŸæäº¤
 				// conn.commit();
 				// conn.setAutoCommit(true);
 				System.out.println("COUNT1:" + count);
 				return "success";
 			} catch (SQLException | IOException se) {
 				/*
-				 * try { //ÊÂÎñÊ§°Ü»Ø¹ö conn.rollback(); } catch (SQLException e1) {
+				 * try { //äº‹åŠ¡å¤±è´¥å›æ»š conn.rollback(); } catch (SQLException e1) {
 				 * e1.printStackTrace(); }
 				 */
 				se.printStackTrace();
@@ -421,7 +421,7 @@ public class FrontDao extends BaseDao {
 		else return result;
 	}
 
-	// »ñÈ¡±¨ÃûĞÅÏ¢
+	// è·å–æŠ¥åä¿¡æ¯
 	public String getApply(String No) throws SQLException, ParseException {
 		String sql = "select Aname,Ajobstate,Atime,Ano from Apply where No=?";
 		System.out.println("NO:" + No);
@@ -448,9 +448,9 @@ public class FrontDao extends BaseDao {
 			java.util.Date now = new java.util.Date();
 			java.util.Date acttime = sdf.parse(date);
 			if (now.before(acttime)) {
-				json.put("sate", "Î´¿ªÊ¼");
+				json.put("sate", "æœªå¼€å§‹");
 			} else if (now.after(acttime)) {
-				json.put("sate", "ÒÑ½áÊø");
+				json.put("sate", "å·²ç»“æŸ");
 			}
 			json.put("Aname", rst.getString("Aname").trim());
 			json.put("Ajobstate", rst.getString("Ajobstate").trim());
@@ -466,7 +466,7 @@ public class FrontDao extends BaseDao {
 		return result;
 	}
 
-	// È¡Ïû±¨Ãû
+	// å–æ¶ˆæŠ¥å
 	public String cancelApply(String No, String Ano, String Ajobstate, String Atime) {
 
 		String sql2 = "update ActivityRequest set DoneAccount=DoneAccount-1 where Ano=? and Atime=? and Ajobstate=?;";
@@ -503,7 +503,7 @@ public class FrontDao extends BaseDao {
 
 	}
 
-	// ÓÃ»§×¢²á
+	// ç”¨æˆ·æ³¨å†Œ
 	public String register(User user) throws IOException {
 		System.out.println("REGISTER");
 
@@ -525,16 +525,16 @@ public class FrontDao extends BaseDao {
 			pstmt.close();
 			conn.close();
 			if (count > 0)
-				return "³É¹¦";
+				return "æˆåŠŸ";
 			else
-				return "²»ÖªÎªºÎÊ§°Ü";
+				return "ä¸çŸ¥ä¸ºä½•å¤±è´¥";
 		} catch (SQLException se) {
 			se.printStackTrace();
 			return se.getMessage();
 		}
 	}
 
-	// ĞŞ¸ÄÓÃ»§ĞÅÏ¢
+	// ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯
 	public int alterInfo(User user) {
 		String sql = "update Account set Name=? , Sex=? , Class=? , Vno=? , Phone=?  where No=?";
 		int count = 0;
@@ -557,7 +557,7 @@ public class FrontDao extends BaseDao {
 		}
 	}
 
-	// ·µ»ØÓÃ»§ĞÅÏ¢
+	// è¿”å›ç”¨æˆ·ä¿¡æ¯
 	public User getUserInfo(String No) {
 		String sql = "select * from Account where No=?;";
 		User user = new User();
@@ -583,7 +583,7 @@ public class FrontDao extends BaseDao {
 		}
 	}
 
-	// ·µ»ØÓÃ»§¹¤Ê±ĞÅÏ¢
+	// è¿”å›ç”¨æˆ·å·¥æ—¶ä¿¡æ¯
 	public ArrayList<Vtime> getVtime(String No) {
 		String sql = "select * from Vtime where No=?;";
 		ArrayList<Vtime> list = new ArrayList<Vtime>();

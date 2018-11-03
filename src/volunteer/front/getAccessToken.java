@@ -14,7 +14,7 @@ import org.json.JSONObject;
 public class getAccessToken {
 
 	public getAccessToken() {
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êı´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ„é€ å‡½æ•°å­˜æ ¹
 	}
 	
 	public String getAcessToken(String appid,String secret) throws IOException

@@ -13,14 +13,14 @@ public class User implements Serializable{
 	private String Atime;
 	private String Ajobstate;
 	private float vtime;
-	private String Aname;//²Î¼Ó»î¶¯µÄÃû³Æ
-	private String Adate;//²Î¼Ó»î¶¯µÄÈÕÆÚ
-	private boolean leader;//Áì¶Ó
+	private String Aname;//å‚åŠ æ´»åŠ¨çš„åç§°
+	private String Adate;//å‚åŠ æ´»åŠ¨çš„æ—¥æœŸ
+	private boolean leader;//é¢†é˜Ÿ
 	private double lng;
 	private double lat;
-	private String college;//×éÖ¯/Ñ§Ğ£
-	private String signIn;//ÊÇ·ñÇ©µ½
-	private String signOut;//ÊÇ·ñÇ©ÍË
+	private String college;//ç»„ç»‡/å­¦æ ¡
+	private String signIn;//æ˜¯å¦ç­¾åˆ°
+	private String signOut;//æ˜¯å¦ç­¾é€€
 	public User() {}
 
 	public void setSignOut(String signOut) {this.signOut=signOut;}

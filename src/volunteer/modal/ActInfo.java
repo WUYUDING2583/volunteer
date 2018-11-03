@@ -10,13 +10,13 @@ public class ActInfo implements Serializable{
 	private String Arequest;
 	private String publishTime;
 	private String picture;
-	private int state;//ÊÇ·ñÒÑ¾­ÉÏ´«¹¤Ê±±í
+	private int state;//æ˜¯å¦å·²ç»ä¸Šä¼ å·¥æ—¶è¡¨
 	private String publishName;
 	private String college;
-	private String Astate;//»î¶¯×´Ì¬
-	private String Adeadline;//±¨Ãû½ØÖ¹Ê±¼ä
-	private double lng;//¾­¶È
-	private double lat;//Î³¶È
+	private String Astate;//æ´»åŠ¨çŠ¶æ€
+	private String Adeadline;//æŠ¥åæˆªæ­¢æ—¶é—´
+	private double lng;//ç»åº¦
+	private double lat;//çº¬åº¦
 	
 	public ActInfo() {}
 	
