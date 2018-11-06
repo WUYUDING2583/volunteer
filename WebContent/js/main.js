@@ -42,17 +42,16 @@ $(document).ready(function(){
 			return;
 		}
 		$.ajax({
-    		url:"../changePsw",
+    		url:"/Volunteer/alterPsw",
     		type:"post",
     		cache:false,
     		data:{
-    			'id':id,
-    			'password':password
+    			'admin.id':id,
+    			'admin.password':password
     		},
     		success:function(data){
     			if(data!=null){
-    				detail=eval("("+data+")");
-    				if(detail.account=="500"){
+    				if(data=="500"){
     					alert("身份证号错误");
     				}
     				else{

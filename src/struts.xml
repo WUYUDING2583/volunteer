@@ -5,9 +5,15 @@
 <struts>
 	<package name="strutsBean" extends="struts-default" namespace="/">
 		<action name="login" class="volunteer.action.AdminAction" method="login">
-			<result name="loginSuccess">/Admin/main.jsp</result>
+			<result name="loginSuccess"  type="redirect">/Admin/main.jsp</result>
 			<result name="loginFail">/Admin/index.jsp</result>
-			<result name="input" type="redirect">/Admin/index.jsp</result>
+			<result name="input">/Admin/index.jsp</result>
+		</action>
+		<action name="alterPsw" class="volunteer.action.AdminAction" method="alterPsw">
+			<result name="stream">
+				<param name="inputName">message</param>
+				<param name="contentType">text/html</param>
+			</result>
 		</action>
 	</package>
 </struts>

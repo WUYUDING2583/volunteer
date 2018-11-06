@@ -1,5 +1,9 @@
 package volunteer.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,6 +48,18 @@ public class AdminAction extends ActionSupport{
 			session.setAttribute("wrongMsg", "密码不能为空");
 			this.addFieldError("loginUser.account", "密码不能为空");
 		}
+	}
+	
+	//修改密码
+	public InputStream alterPsw(Admin admin) throws UnsupportedEncodingException{
+		AdminService adminSer=new AdminService();
+		System.out.println("111");
+		String msg="500";
+		if(adminSer.alterPsw(admin)) {
+			msg="200";
+		}
+		InputStream is=new ByteArrayInputStream(msg.getBytes("utf-8"));
+        return is;
 	}
 		
 }

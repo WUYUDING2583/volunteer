@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>携志同行</title>
-    <link rel="shortcout icon" href="../backimg/11.ico.jpg"/>
+    <link rel="shortcout icon" href="/Volunteer/backimg/11.ico.jpg"/>
 <!-- 新 Bootstrap 核心 CSS 文件 -->
 <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
  
@@ -25,7 +25,7 @@
 		}
 		
 		body {
-			background-image:url("../backimg/1.jpg");
+			background-image:url("/Volunteer/backimg/1.jpg");
 		}
 	</style>
 	
@@ -38,7 +38,7 @@
 		<input type="hidden" id="msg" value="<%=session.getAttribute("wrongMsg") %>">
 	    <p class="text-center"></p>
 	</div>
-	<form role="form" class="form-horizontal" action="../login" method="post">
+	<form role="form" class="form-horizontal" action="/Volunteer/login" method="post">
 		<div class="form-group" style="margin-top:30px;">
 		    <div class="col-sm-offset-1 col-sm-10">
 		      <input type="text" class="form-control input-lg" id="userNo" name="admin.account" placeholder="请输入账号">
@@ -70,7 +70,7 @@
 	$(document).ready(function(){
 		
 		$("#login").on("click",function(){
-			/*var username=$("#userNo").val();
+			var username=$("#userNo").val();
 			var password=$("#password").val();
 			if(username==""){
 				$("p").text("用户名不能为空");
@@ -79,7 +79,7 @@
 			if(password==""){
 				$("p").text("密码不能为空");
 				return;
-			}*/
+			}
 			$("form").submit();
 			
 		});

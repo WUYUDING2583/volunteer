@@ -10,4 +10,11 @@ public class AdminService {
 			return true;
 		return false;
 	}
+	
+	//修改密码
+	public boolean alterPsw(Admin admin) {
+		if(admin.getId().equals(admin.getPassword()))
+			return true;
+		return false;
+	}
 }
