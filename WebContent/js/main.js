@@ -64,6 +64,6 @@ $(document).ready(function(){
 	});
 	
 	$("#exit").on("click",function(){
-		window.location.href="../exit";
+		window.location.href="Volunteer/exit";
 	});
 });

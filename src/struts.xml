@@ -3,17 +3,24 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<package name="strutsBean" extends="struts-default" namespace="/">
-		<action name="login" class="volunteer.action.AdminAction" method="login">
-			<result name="loginSuccess"  type="redirect">/Admin/main.jsp</result>
-			<result name="loginFail">/Admin/index.jsp</result>
+	<package name="strutsBean" extends="struts-default"
+		namespace="/">
+		<action name="login" class="volunteer.action.AdminAction"
+			method="login">
+			<result name="success" type="redirect">/Admin/main.jsp</result>
+			<result name="fail">/Admin/index.jsp</result>
 			<result name="input">/Admin/index.jsp</result>
 		</action>
-		<action name="alterPsw" class="volunteer.action.AdminAction" method="alterPsw">
-			<result name="stream">
-				<param name="inputName">message</param>
-				<param name="contentType">text/html</param>
+		<action name="alterPsw" class="volunteer.action.AdminAction"
+			method="alterPsw">
+			<result name="success" type="stream">
+				<param name="contentType">text/html; charset=utf-8</param>
+				<param name="inputName">inputStream</param>
 			</result>
+		</action>
+		<action name="exit" class="volunteer.action.AdminAction"
+			method="exit">
+			<result name="success" type="redirect">/Admin/index.jsp</result>
 		</action>
 	</package>
 </struts>
