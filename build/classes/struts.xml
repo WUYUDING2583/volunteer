@@ -22,5 +22,16 @@
 			method="exit">
 			<result name="success" type="redirect">/Admin/index.jsp</result>
 		</action>
+		<action name="isRegister" class="volunteer.action.FrontAction" method="isRegister"/>
+		<action name="insertUserMess" class="volunteer.action.FrontAction" method="insertUserMess"/>
+		<action name="viewActivity" class="volunteer.action.FrontAction" method="viewActivity"/>
+		<action name="viewApply" class="volunteer.action.FrontAction" method="viewApply"/>
+		<action name="apply" class="volunteer.action.FrontAction" method="apply"/>
+		<action name="searchManHour" class="volunteer.action.FrontAction" method="searchManHour"/>
+		<action name="isRegister" class="volunteer.action.FrontAction" method="isRegister"/>
+		<action name="cancelApply" class="volunteer.action.FrontAction" method="cancelApply"/>
+		<action name="updateUserMess" class="volunteer.action.FrontAction" method="updateUserMess"/>
+		<action name="userMess" class="volunteer.action.FrontAction" method="userMess"/>
+		
 	</package>
 </struts>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD
+3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="volunteer.po.ManHour" table="Vtime" catalog="volunteer">
+		<id name="No" type="string">
+			<column name="No" />
+		</id>
+		<property name="Aname" type="string">
+			<column name="Aname" />
+		</property>
+		<property name="Adate" type="string">
+			<column name="Adate" />
+		</property>
+		<property name="Avtime" type="float">
+			<column name="Avtime" />
+		</property>
+	</class>
+</hibernate-mapping>

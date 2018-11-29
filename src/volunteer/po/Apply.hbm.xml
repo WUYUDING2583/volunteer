@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD
+3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="volunteer.po.Apply" table="apply" catalog="volunteer">
+		<composite-id name="pk" class="volunteer.po.ApplyPK">
+			<key-property name="No" column="No" />
+			<key-property name="Ano" column="Ano" />
+			<key-property name="Atime" column="Atime" />
+			<key-property name="Ajobstate" column="Ajobstate" />
+		</composite-id>
+		<property name="Aname" type="string">
+			<column name="Aname" />
+		</property>
+	</class>
+</hibernate-mapping>

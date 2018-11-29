@@ -155,7 +155,6 @@ public class AdminDao extends BaseDao{
 					user.setVtime((float)vtime.getNumericCellValue());
 					list.add(user);
 				}
-
 				String sql="insert into Vtime values(?,?,?,?)";
 				Connection conn=getConnection();
 				PreparedStatement pstmt=conn.prepareStatement(sql);
