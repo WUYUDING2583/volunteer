@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/lj_ManagementSystem" reloadable="true">
   <Resource 
-      driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
+      driverClassName="com.mysql.jdbc.Driver" 
       maxActive="40" 
       maxIdle="2" 
       maxWait="5000" 
       name="jdbc/sampleDS" 
-      password="Family123" 
+      password="park" 
       type="javax.sql.DataSource" 
-      url="jdbc:sqlserver://120.79.130.100:1433;databaseName=Volunteer" 
-      username="volunteer">
+      url="jdbc:mysql://120.79.130.100:3306/volunteer?useUnicode=true&amp;characterEncoding=UTF-8" 
+      username="PMS">
   </Resource>
 </Context>

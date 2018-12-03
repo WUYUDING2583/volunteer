@@ -26,7 +26,7 @@
 			<column name="picture" />
 		</property>
 		<property name="state" type="integer">
-			<column name="Arequest" />
+			<column name="state" />
 		</property>
 		<property name="publishName" type="string">
 			<column name="publishName" />
@@ -40,18 +40,17 @@
 		<property name="Adeadline" type="string">
 			<column name="Adeadline" />
 		</property>
-		<property name="Arequest" type="string">
-			<column name="Arequest" />
-		</property>
 		<property name="lng" type="double">
 			<column name="lng" />
 		</property>
 		<property name="lat" type="double">
 			<column name="lat" />
 		</property>
+		<!--  
 		<set name="actreqs" inverse="true" cascade="all" lazy="false">
 			<key column="Ano" />
 			<one-to-many class="volunteer.po.ActReq" />
 		</set>
+		-->
 	</class>
 </hibernate-mapping>

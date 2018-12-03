@@ -3,7 +3,7 @@
 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="volunteer.po.ActBase" table="activityinfo" catalog="volunteer">
+	<class name="volunteer.po.ActBase" table="activityinfo" catalog="volunteer" polymorphism="explicit">
 		<id name="Ano" type="string">
 			<column name="Ano" />
 		</id>

@@ -2,6 +2,7 @@ package volunteer.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -9,21 +10,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
-
-import volunteer.front.getOpenId;
 import volunteer.po.Apply;
 import volunteer.po.ApplyPK;
 import volunteer.po.User;
+import volunteer.po.ViewApplyPK;
 import volunteer.service.FrontService;
+import volunteer.service.getOpenId;
 
 public class FrontAction {
 
 	private User user;
 	public FrontAction() {
-		// TODO 自动生成的构造函数存根
+		request = ServletActionContext.getRequest();
+		response = ServletActionContext.getResponse();
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("Cache-Control", "no-cache");
 	}
-	HttpServletRequest request = ServletActionContext.getRequest();
-	HttpServletResponse response = ServletActionContext.getResponse();
+	HttpServletRequest request;
+	HttpServletResponse response;
 	PrintWriter out;
 	FrontService front=new FrontService();
 //判断是否注册过
@@ -60,7 +70,6 @@ public class FrontAction {
 //获取活动列表
 	public void viewActivity() 
 	{
-		
 		String flag=request.getParameter("flag");
 		System.out.println("FLAG  "+flag);
 		try {
@@ -76,14 +85,21 @@ public class FrontAction {
 		}
 	}
 //获取活动详细情况
-	/*
+	
 	public void viewApply() 
 	{
 		String Aname=request.getParameter("Aname");
 		String Ano=request.getParameter("Ano");
 		String Adeadline=request.getParameter("Adeadline");
-		front.viewApply();
-	}*/
+		String result=front.getActivityDetail(new ViewApplyPK(Ano,Aname,Adeadline));
+		try {
+			out=response.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("VIEWAPPLY:"+result);
+		out.print(result);
+	}
 //报名
 	public void apply() 
 	{
@@ -95,7 +111,7 @@ public class FrontAction {
 		String Address=request.getParameter("Address");
 		String Adate=request.getParameter("Adate");
 		String formId=request.getParameter("formId"); 
-		ApplyPK pk=new ApplyPK(No,Ano,Atime,Ajobstate);
+		ApplyPK pk=new ApplyPK(No,Ano,Ajobstate,Atime);
 		try {
 			out=response.getWriter();
 		} catch (IOException e) {
@@ -103,7 +119,7 @@ public class FrontAction {
 		} 
 		Apply apply=new Apply(pk,Aname);
 		try {
-			out.println(front.apply(apply,Address,Adate,formId));
+			out.print(front.apply(apply,Address,Adate,formId));
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -131,13 +147,10 @@ public class FrontAction {
 		String result="";
 		String No=request.getParameter("No");
 		String flag=request.getParameter("flag");
-		if(flag.equals("getApply"))
+		try {
+			if(flag.equals("getApply"))
 			{
-				try {
 					result=front.getApply(No);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
 			}
 			if(flag.equals("cancelApply"))
 			{
@@ -147,12 +160,12 @@ public class FrontAction {
 				result=front.cancelApply(new ApplyPK(No,Ano,Ajobstate,Atime));
 				System.out.println("No: "+No+"Ano: "+Ano+"Ajobstate: "+Ajobstate+"Atime: "+Atime);
 			}
-			try {
-				PrintWriter out=response.getWriter();
-			} catch (IOException e) {
+			out=response.getWriter();
+		System.out.println("SSSSSS:"+result);
+			out.print(result);
+			} catch ( ParseException | IOException e) {
 				e.printStackTrace();
 			}
-			out.println(result);
 	}
 //更新用户信息
 	public void updateUserMess() 
@@ -182,6 +195,8 @@ public class FrontAction {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println("USERMESS"+front.getUserInfo(No));
 		out.print(front.getUserInfo(No));
 	}
 }

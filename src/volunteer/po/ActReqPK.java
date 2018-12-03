@@ -16,6 +16,12 @@ public class ActReqPK implements Serializable {
 		Ajobstate = ajobstate;
 	}
 
+	public ActReqPK(String ano, String atime) {
+		super();
+		Ano = ano;
+		Atime = atime;
+	}
+
 	public void setAno(String ano) {
 		Ano = ano;
 	}

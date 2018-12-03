@@ -5,7 +5,7 @@
 <hibernate-mapping>
 	<class name="volunteer.po.Admin" table="admin" catalog="volunteer">
 		<id name="id" type="string">
-			<column name="Ano" />
+			<column name="id" />
 		</id>
 		<property name="account" type="string">
 			<column name="account" />

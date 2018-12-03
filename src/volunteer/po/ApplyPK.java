@@ -1,7 +1,13 @@
 package volunteer.po;
 
-public class ApplyPK {
+import java.io.Serializable;
 
+public class ApplyPK implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public ApplyPK() {
 		// TODO 自动生成的构造函数存根
 	}

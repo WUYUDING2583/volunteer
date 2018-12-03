@@ -1,7 +1,13 @@
 package volunteer.po;
 
-public class ManHour {
+import java.io.Serializable;
 
+public class ManHour implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public ManHour() {
 		// TODO 自动生成的构造函数存根
 	}

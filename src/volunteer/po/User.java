@@ -3,6 +3,10 @@ package volunteer.po;
 import java.io.Serializable;
 
 public class User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String Name;
 	private String Sex;
 	private String No;
@@ -10,7 +14,8 @@ public class User implements Serializable{
 	public String getCclass() {
 		return Cclass;
 	}
-	public void setCclass(String cclass) {
+	public void setCclass(String cclass) 
+	{
 		Cclass = cclass;
 	}
 	private String Vno;

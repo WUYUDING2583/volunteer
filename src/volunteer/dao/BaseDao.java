@@ -1,5 +1,5 @@
 
-/*package volunteer.dao;
+package volunteer.dao;
 
 import java.sql.*;
 import javax.naming.Context;
@@ -21,4 +21,3 @@ public class BaseDao {
        return dataSource.getConnection();
    }
 }
-*/

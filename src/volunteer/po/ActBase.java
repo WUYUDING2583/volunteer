@@ -12,6 +12,18 @@ public class ActBase {
 	private String Arequest;
 	private String publishTime;
 	private String picture;
+	public ActBase(String ano, String adate, String aname, String address, String arequest, String publishTime,
+			String picture, String adeadline) {
+		super();
+		Ano = ano;
+		Adate = adate;
+		Aname = aname;
+		Address = address;
+		Arequest = arequest;
+		this.publishTime = publishTime;
+		this.picture = picture;
+		Adeadline = adeadline;
+	}
 	private String Adeadline;//报名截止时间
 	private String Astate;//活动状态
 	public String getAstate() {
