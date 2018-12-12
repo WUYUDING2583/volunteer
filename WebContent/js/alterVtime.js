@@ -9,13 +9,13 @@ $(document).ready(function(){
 		var No=$(this).parents("tr").find(".No").text();
 		var $this=$(this);
 		$.ajax({
-    		url:"../vtimeDeleteServlet",
+    		url:"/Volunteer/vtimeDelete",
     		type:"post",
     		cache:false,
     		data:{
-    			'Aname':Aname,
-    			'Adate':Adate,
-    			'No':No
+    			'user.Aname':Aname,
+    			'user.Adate':Adate,
+    			'user.No':No
     		},
     		success:function(data){
     			if(data!="0"){
@@ -46,17 +46,17 @@ $(document).ready(function(){
 			var Adate=title[1];
 			var No=title[2];
 			$.ajax({
-	    		url:"../alterVtimeServlet",
+	    		url:"/Volunteer/alterVtime",
 	    		type:"post",
 	    		cache:false,
 	    		data:{
-	    			'Aname':Aname,
-	    			'Adate':Adate,
-	    			'No':No,
-	    			'vtime':vtime
+	    			'user.Aname':Aname,
+	    			'user.Adate':Adate,
+	    			'user.No':No,
+	    			'user.vtime':vtime
 	    		},
 	    		success:function(data){
-	    			if(data=="ok"){
+	    			if(data!="0"){
 	    				$($td).parents("td").html(vtime);
 	    			}
 	    		}
@@ -70,12 +70,12 @@ $(document).ready(function(){
 		$("#vtimeDetail .modal-title").text(Aname+" "+Adate);
 		No=$(this).attr("id");
 		$.ajax({
-    		url:"../vtimeDetailServlet",
+    		url:"/Volunteer/vtimeDetail",
     		type:"post",
     		cache:false,
     		data:{
-    			'Aname':Aname,
-    			'Adate':Adate
+    			'user.Aname':Aname,
+    			'user.Adate':Adate
     		},
     		success:function(data){
     			var detail=eval("("+data+")");
@@ -109,14 +109,14 @@ $(document).ready(function(){
 		var No=$("#No").val();
 		var vtime=$("#vtime").val();
 		$.ajax({
-    		url:"../addVtimeServlet",
+    		url:"/Volunteer/addVtime",
     		type:"post",
     		cache:false,
     		data:{
-    			'No':No,
-    			'Avtime':vtime,
-    			'Aname':Aname,
-    			'Adate':Adate
+    			'user.No':No,
+    			'user.Avtime':vtime,
+    			'user.Aname':Aname,
+    			'user.Adate':Adate
     		},
     		success:function(data){
     			if(data!="no"){

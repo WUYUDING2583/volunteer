@@ -7,22 +7,22 @@ var iframetop=$("iframe").offset().top;
 $("iframe").height(height-iframetop);
 $(document).ready(function(){
 	$("#addActivity").on("click",function(){
-		$("iframe").attr("src","addActivity.jsp");
+		$("iframe").attr("src","/Volunteer/Admin/addActivity.jsp");
 	});
 	
 	$("#myActivity").on("click",function(){
-		$("iframe").attr("src","../myActivityServlet");
+		$("iframe").attr("src","/Volunteer/myActivity");
 	});
 	
 	$("#uploadVtime").on("click",function(){
-		$("iframe").attr("src","../uploadVtimeServlet");
+		$("iframe").attr("src","/Volunteer/endNotUp");
 	});
 	
 	$("#vtimeSearch").on("click",function(){
-		$("iframe").attr("src","vtimeSearch.jsp");
+		$("iframe").attr("src","/Volunteer/Admin/vtimeSearch.jsp");
 	});
 	$("#alterVtime").on("click",function(){
-		$("iframe").attr("src","../alterVtimeServlet");
+		$("iframe").attr("src","/Volunteer/endAndUp");
 	});
 	
 	$("#change").on("click",function(){
@@ -64,6 +64,6 @@ $(document).ready(function(){
 	});
 	
 	$("#exit").on("click",function(){
-		window.location.href="Volunteer/exit";
+		window.location.href="/Volunteer/exit";
 	});
 });

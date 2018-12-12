@@ -8,11 +8,11 @@ var width=$(window).width();
 $(document).ready(function(){
 	$("tbody").on("click",".look",function(){
 		$.ajax({
-    		url:"../showActivityServlet",
+    		url:"/Volunteer/showActivity",
     		type:"post",
     		cache:false,
     		data:{
-    			'Ano':$(this).parents("tr").children("input").val()
+    			'info.Ano':$(this).parents("tr").children("input").val()
     		},
     		success:function(data){
     			var jsonArr=new Array();
@@ -65,11 +65,11 @@ $(document).ready(function(){
 	$("tbody").on("click",".delete",function(){
 		var $tr=$(this).parents("tr");
 		$.ajax({
-    		url:"../deleteActivityServlet",
+    		url:"/Volunteer/deleteActivity",
     		type:"post",
     		cache:false,
     		data:{
-    			'Ano':$(this).parents("tr").children("input").val()
+    			'info.Ano':$(this).parents("tr").children("input").val()
     		},
     		success:function(data){
     			if(data=="0"){
@@ -83,7 +83,7 @@ $(document).ready(function(){
 	});
 	
 	$("#lookActivity").on("click","#export",function(){
-		var $str="<iframe src='../exportListServlet?Ano="+$(this).parents(".modal-content").find("#hidAno").val()+"&fileName="+$(this).parents(".modal-content").find("#hidAname").val()+"_"+$(this).parents(".modal-content").find("#hidAdate").val()+"' style='display:none;'></iframe>";
+		var $str="<iframe src='/Volunteer/excelJobState?info.Ano="+$(this).parents(".modal-content").find("#hidAno").val()+"&fileName="+$(this).parents(".modal-content").find("#hidAname").val()+"_"+$(this).parents(".modal-content").find("#hidAdate").val()+"' style='display:none;'></iframe>";
 		$(".modal-body").append($str);
 	});
 

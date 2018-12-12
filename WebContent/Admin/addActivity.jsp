@@ -58,7 +58,7 @@
 <body>
 <div id="container" style="display:none;"></div>
 <div id="11"></div>
-	<form class="form-horizontal" role="form">
+	<form id="form" class="form-horizontal" role="form" >
 		<input type="hidden" id="searchlng">
 		<input type="hidden" id="searchlat">
     	 <div class="form-group">
@@ -76,12 +76,14 @@
                         <span class="btn default btn-file">
                         <button class="btn btn-success fileinput-new">选择</button>
                         <button class="btn btn-info fileinput-exists">更改</button>
-                        <input type="file" name="uploadImage" id="uploadImage" /></span>
+                        <input type="file" name="file"  id="uploadImage" /></span>
                         <button class="btn btn-default fileinput-exists" data-dismiss="fileinput">移除</button>
                     </div>
                 </div>
             </div>
         </div>
+        </form>
+        <form id="form" class="form-horizontal" role="form">
 		<div class="form-group">
     		<label for="Aname" class="col-sm-2 control-label">活动名称</label>
     		<div class="col-sm-7">
@@ -168,6 +170,6 @@
         </div>
     </div>
 </div>
-	<script src="../js/addActivity.js"></script>
+	<script src="/Volunteer/js/addActivity.js"></script>
 </body>
 </html>

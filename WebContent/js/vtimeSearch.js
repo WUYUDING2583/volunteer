@@ -5,11 +5,11 @@ $(document).ready(function(){
 	$("button").on("click",function(){
 		var No=$("#No").val();
 		$.ajax({
-    		url:"../vtimeSearchServlet",
+    		url:"/Volunteer/vtimeSearch",
     		type:"post",
     		cache:false,
     		data:{
-    			'No':No
+    			'user.No':No
     		},
     		success:function(data){
     			var detail=eval("("+data+")");

@@ -15,8 +15,7 @@ $(document).ready(function(){
 	});
 	
 	$("#submit").on("click",function(){
-		var formData = new FormData();
-        formData.append("myfile", document.getElementById("upload").files[0]);  
+		var formData = new FormData($("#form")[0]);
         var str=$("#upload").val();
         var file= getFileName(str);
         var fileName=file.substring(0,file.lastIndexOf('.'));
@@ -26,29 +25,27 @@ $(document).ready(function(){
         var date=nameList[1];
         var Adate=date.substring(0,4)+"-"+date.substring(4,6)+"-"+date.substring(6);
         if(Aname==name&&dat==Adate){
-
             $.ajax({
-	      		url:"../uploadVtimeServlet",
+	      		url:"/Volunteer/uploadVtime",
 	      		type:"post",
-	      		cache:false,
-	      		data:formData,
-	      		contentType: false,
-	              processData: false,
-	              dataType: "text",
+	    		data:formData,
+	    		contentType: false,
+	            processData: false,
+	            dataType:"text",
 	      		success:function(data){
 	      			if(data!="0"){
-	      				alert("提交成功");
-	      				$("#vtimeSubmit").modal("hide");
+	      				alert(data);
+	      				$("#vtimeSubmit").modal("hide"); 
 	      				$("#"+No).text("修改工时");
 	      				$("#"+No).removeAttr("class");
 	      				$("#"+No).off("click");
 	      				$("#"+No).parents("tr").remove();
 	      				$.ajax({
-	      		    		url:"../setStateServlet",
+	      		    		url:"/Volunteer/setState",
 	      		    		type:"post",
 	      		    		cache:false,
 	      		    		data:{
-	      		    			'Ano':No
+	      		    			'info.Ano':No
 	      		    		},
 	      		    		success:function(data){
 	      		    			

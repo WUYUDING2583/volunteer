@@ -43,7 +43,7 @@
 		    <div class="col-sm-offset-1 col-sm-10">
 		      <input type="text" class="form-control input-lg" id="userNo" name="admin.account" placeholder="请输入账号">
 		    </div>
-	  	</div>	
+	  	</div>	 
 	  	<div class="form-group">
 		    <div class="col-sm-offset-1 col-sm-10">
 		      <input type="password" class="form-control input-lg" id="password" name="admin.password" placeholder="请输入密码">

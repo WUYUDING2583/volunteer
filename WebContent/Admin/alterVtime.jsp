@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*,volunteer.modal.ActInfo" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -34,22 +35,20 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	  <% ArrayList<ActInfo> infoList=(ArrayList<ActInfo>)session.getAttribute("infoList"); 
-	  	int length=infoList.size();
-	  	for(int i=0;i<length;i++){
-	  		if(infoList.get(i).getAstate().equals("已结束")&&infoList.get(i).getState()!=0){
-	  %>
-	    <tr>
-	      <input type="hidden" class="Ano" value="<%=infoList.get(i).getAno() %>">
-	      <input type="hidden" class="state" value="<%=infoList.get(i).getState() %>">
-	      <td class="Aname"><%=infoList.get(i).getAname() %></td>
-	      <td class="Pname"><%=infoList.get(i).getPublishName() %></td>
-	      <td class="Adate"><%=infoList.get(i).getAdate() %></td>
+	  <s:iterator value="infoList" var="info">
+				<tr>
+	      <input type="hidden" class="Ano" value="<s:property value="#info.Ano" />">
+	      <input type="hidden" class="state" value="<s:property value="#info.state" />">
+	      
+	      <td class="Aname"><s:property value="#info.Aname" /></td>
+	      <td class="Pname"><s:property value="#info.publishName" /></td>
+	      <td class="Adate"><s:property value="#info.Adate" /></td>
 	      <td>
-	      	<button class="btn btn-info alter" id="<%=infoList.get(i).getAno() %>">修改工时</button> 
+	      	<button class="btn btn-info alter" id="<s:property value="#info.Ano" />">修改工时</button> 
 	      </td>
-	    </tr>
-	    <%} }%>
+		</tr>
+		</s:iterator>
+	 
 	  </tbody>
 	</table>
 	</div>
@@ -77,7 +76,7 @@
 				<div class="row">
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8 text-center">
-                	<button type="button" class="btn btn-primary btn-block" id="confirm" data-dismiss="modal">确认修改</button>
+                	<button type="button" class="btn btn-primary btn-block" id="confirm" data-dismiss="modal">关闭</button>
                 </div>
 				<div class="col-sm-2"></div>
 				</div>
@@ -85,7 +84,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-<script src="../js/alterVtime.js"></script>
+<script src="/Volunteer/js/alterVtime.js"></script>
 <%session.removeAttribute("infoList"); %>
 </body>
 </html>

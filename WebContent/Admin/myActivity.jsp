@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.util.*,volunteer.modal.ActInfo" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -45,26 +46,24 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	  <% ArrayList<ActInfo> infoList=(ArrayList<ActInfo>)session.getAttribute("infoList"); 
-	  	int length=infoList.size();
-	  	for(int i=0;i<length;i++){
-	  		if(infoList.get(i).getAstate().equals("进行中")){
-	  %>
-	    <tr>
-	      <input type="hidden" class="Ano" value="<%=infoList.get(i).getAno() %>">
-	      <td class="Aname"><%=infoList.get(i).getAname() %></td>
-	      <td class="Pname"><%=infoList.get(i).getPublishName() %></td>
-	      <td class="Ptime"><%=infoList.get(i).getPublishTime() %></td>
-	      <td>
-	      	<a class="tooltip-test" data-toggle="tooltip" title="查看活动">
-	      		<span class="glyphicon glyphicon-search look"></span>
-	      	</a>
-	      	<a class="tooltip-test" data-toggle="tooltip" title="删除活动">
-	      		<span class="glyphicon glyphicon-trash delete"></span>
-	      	</a>
-	      </td>
-	    </tr>
-	    <%} }%>
+	  <s:iterator value="infoList" var="info">
+	  	<s:if test='#info.Astate=="正在进行"'>
+				<tr>
+		      		<input type="hidden" class="Ano" value="<s:property value="#info.Ano" />" />
+					<td><s:property value="#info.Aname" /></td>
+					<td><s:property value="#info.publishName" /></td>
+					<td><s:property value="#info.publishTime" /></td>
+					<td>
+				      	<a class="tooltip-test" data-toggle="tooltip" title="查看活动">
+				      		<span class="glyphicon glyphicon-search look"></span>
+				      	</a>
+				      	<a class="tooltip-test" data-toggle="tooltip" title="删除活动">
+				      		<span class="glyphicon glyphicon-trash delete"></span>
+				      	</a>
+			      	</td>
+				</tr>
+		  </s:if>
+		</s:iterator>
 	  </tbody>
 	</table>
 	    </div>
@@ -79,25 +78,24 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	  <% 
-	  	for(int i=0;i<length;i++){
-	  		if(infoList.get(i).getAstate().equals("未开始")){
-	  %>
-	    <tr>
-	      <input type="hidden" class="Ano" value="<%=infoList.get(i).getAno() %>">
-	      <td class="Aname"><%=infoList.get(i).getAname() %></td>
-	      <td class="Pname"><%=infoList.get(i).getPublishName() %></td>
-	      <td class="Ptime"><%=infoList.get(i).getPublishTime() %></td>
-	      <td>
-	      	<a class="tooltip-test" data-toggle="tooltip" title="查看活动">
-	      		<span class="glyphicon glyphicon-search look"></span>
-	      	</a>
-	      	<a class="tooltip-test" data-toggle="tooltip" title="删除活动">
-	      		<span class="glyphicon glyphicon-trash delete"></span>
-	      	</a>
-	      </td>
-	    </tr>
-	    <%} }%>
+	  <s:iterator value="infoList" var="info">
+	  	<s:if test='#info.Astate=="未开始"'>
+				<tr>
+		      		<input type="hidden" class="Ano" value="<s:property value="#info.Ano" />" />
+					<td><s:property value="#info.Aname" /></td>
+					<td><s:property value="#info.publishName" /></td>
+					<td><s:property value="#info.publishTime" /></td>
+					<td>
+				      	<a class="tooltip-test" data-toggle="tooltip" title="查看活动">
+				      		<span class="glyphicon glyphicon-search look"></span>
+				      	</a>
+				      	<a class="tooltip-test" data-toggle="tooltip" title="删除活动">
+				      		<span class="glyphicon glyphicon-trash delete"></span>
+				      	</a>
+			      	</td>
+				</tr>
+		  </s:if>
+		</s:iterator>
 	  </tbody>
 	</table>
 	    </div>
@@ -112,25 +110,24 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	  <% 
-	  	for(int i=0;i<length;i++){
-	  		if(infoList.get(i).getAstate().equals("已结束")){
-	  %>
-	    <tr>
-	      <input type="hidden" class="Ano" value="<%=infoList.get(i).getAno() %>">
-	      <td class="Aname"><%=infoList.get(i).getAname() %></td>
-	      <td class="Pname"><%=infoList.get(i).getPublishName() %></td>
-	      <td class="Ptime"><%=infoList.get(i).getPublishTime() %></td>
-	      <td>
-	      	<a class="tooltip-test" data-toggle="tooltip" title="查看活动">
-	      		<span class="glyphicon glyphicon-search look"></span>
-	      	</a>
-	      	<a class="tooltip-test" data-toggle="tooltip" title="删除活动">
-	      		<span class="glyphicon glyphicon-trash delete"></span>
-	      	</a>
-	      </td>
-	    </tr>
-	    <%} }%>
+	  <s:iterator value="infoList" var="info">
+	  	<s:if test='#info.Astate=="已结束"'>
+				<tr>
+		      		<input type="hidden" class="Ano" value="<s:property value="#info.Ano" />" />
+					<td><s:property value="#info.Aname" /></td>
+					<td><s:property value="#info.publishName" /></td>
+					<td><s:property value="#info.publishTime" /></td>
+					<td>
+				      	<a class="tooltip-test" data-toggle="tooltip" title="查看活动">
+				      		<span class="glyphicon glyphicon-search look"></span>
+				      	</a>
+				      	<a class="tooltip-test" data-toggle="tooltip" title="删除活动">
+				      		<span class="glyphicon glyphicon-trash delete"></span>
+				      	</a>
+			      	</td>
+				</tr>
+		  </s:if>
+		</s:iterator>
 	  </tbody>
 	</table>
 	    </div>
@@ -160,7 +157,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-<script src="../js/myActivity.js"></script>
+<script src="/Volunteer/js/myActivity.js"></script>
 <%session.removeAttribute("infoList"); %>
 </body>
 </html>

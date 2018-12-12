@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*,volunteer.modal.ActInfo" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	 <link rel="stylesheet" href="../bootstrap-fileinput/bootstrap-fileinput.css">
+	 <link rel="stylesheet" href="/Volunteer/bootstrap-fileinput/bootstrap-fileinput.css">
 	 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.8&key=cc17678642f59e975f39bb06fcb83665&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geolocation"></script>
     
 <!-- 新 Bootstrap 核心 CSS 文件 -->
@@ -18,7 +19,7 @@
  
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="../bootstrap-fileinput/bootstrap-fileinput.js"></script>
+	<script src="/Volunteer/bootstrap-fileinput/bootstrap-fileinput.js"></script>
 	<style>
 		body{
 			padding-top:50px;
@@ -39,23 +40,21 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	  <% ArrayList<ActInfo> infoList=(ArrayList<ActInfo>)session.getAttribute("infoList"); 
-	  	int length=infoList.size();
-	  	for(int i=0;i<length;i++){
-	  		if(infoList.get(i).getAstate().equals("已结束")&&infoList.get(i).getState()==0){
-	  %>
-	    <tr>
-	      <input type="hidden" class="Ano" value="<%=infoList.get(i).getAno() %>">
-	      <input type="hidden" class="state" value="<%=infoList.get(i).getState() %>">
-	      <td class="Aname"><%=infoList.get(i).getAname() %></td>
-	      <td class="Pname"><%=infoList.get(i).getPublishName() %></td>
-	      <td class="Adate"><%=infoList.get(i).getAdate() %></td>
-	      <td class="Astate"><%=infoList.get(i).getAstate() %></td>
+	   <s:iterator value="infoList" var="info">
+				<tr>
+	      <input type="hidden" class="Ano" value="<s:property value="#info.Ano" />">
+	      <input type="hidden" class="state" value="<s:property value="#info.state" /> %>">
+	      
+	      <td class="Aname"><s:property value="#info.Aname" /></td>
+	      <td class="Pname"><s:property value="#info.publishName" /></td>
+	      <td class="Adate"><s:property value="#info.Adate" /></td>
+	      <td class="Astate"><s:property value="#info.state" /></td>
 	      <td>
-	      	<button class="btn btn-success sub" id="<%=infoList.get(i).getAno() %>">提交工时表</button> 
+	      	<button class="btn btn-success sub" id="<s:property value="#info.Ano" />">提交工时表</button> 
 	      </td>
-	    </tr>
-	    <%} }%>
+		</tr>
+		</s:iterator>
+	  
 	  </tbody>
 	</table>
 	</div>
@@ -72,11 +71,13 @@
                     	<div class="fileinput-preview fileinput-exists thumbnail text-center" style="max-width: 200px; max-height: 150px;"></div>
                     </div>
                     <div>
+                    <form id="form">
                         <span class="btn default btn-file">
                         <button class="btn btn-success fileinput-new">选择文件</button>
                         <button class="btn btn-info fileinput-exists">更改</button>
-                        <input type="file" name="upload" id="upload" /></span>
+                        <input type="file"name="file" id="upload" /></span>
                         <button class="btn btn-default fileinput-exists" data-dismiss="fileinput">移除</button>
+                    </form>
                     </div>
                 </div>
 			</div>
@@ -95,8 +96,8 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-
-<script src="../js/uploadVtime.js"></script>
+<div id="111"></div>
+<script src="/Volunteer/js/uploadVtime.js"></script>
 <%session.removeAttribute("infoList"); %>
 </body>
 </html>

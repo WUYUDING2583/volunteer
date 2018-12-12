@@ -41,6 +41,6 @@
 		  </thead>
 		  <tbody></tbody>
 	</div> 
-	<script src="../js/vtimeSearch.js"></script>
+	<script src="/Volunteer/js/vtimeSearch.js"></script>
 </body>
 </html>

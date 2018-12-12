@@ -13,14 +13,14 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import volunteer.bean.Admin;
+import volunteer.po.Admin;
 import volunteer.service.AdminService;
 
 public class AdminAction extends ActionSupport {
-	
-	private final static String SUCCESS="success";
-	private final static String FAIL="fail";
-	
+
+	private final static String SUCCESS = "success";
+	private final static String FAIL = "fail";
+
 	HttpServletRequest request = ServletActionContext.getRequest();
 	HttpServletResponse response = ServletActionContext.getResponse();
 	ServletContext application = ServletActionContext.getServletContext();
@@ -28,33 +28,22 @@ public class AdminAction extends ActionSupport {
 
 	private Admin admin;
 
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
 	private InputStream inputStream;
-
-	public InputStream getInputStream() {
-		return inputStream;
-	}
-
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
-	}
 
 	// 登陆
 	public String login() {
 		AdminService adminSer = new AdminService();
-		if (adminSer.login(admin)) {
+		String account=admin.getAccount();
+		String password=admin.getPassword();
+		admin=adminSer.login(account, password);
+		if(admin.getAccount().equals("wrong")) {
+			session.setAttribute("wrongMsg", "用户名或密码错误");
+			return FAIL;
+		}
+		else {
 			session.setAttribute("Admin", admin);
 			return SUCCESS;
 		}
-		session.setAttribute("wrongMsg", "用户名或密码错误");
-		return FAIL;
 	}
 
 	// 登陆校验
@@ -75,17 +64,34 @@ public class AdminAction extends ActionSupport {
 	public String alterPsw() throws UnsupportedEncodingException {
 		AdminService adminSer = new AdminService();
 		String msg = "500";
-		if (adminSer.alterPsw(admin)) {
+		String id=admin.getId();
+		String password=admin.getPassword();
+		if (adminSer.alterPsw(id, password)) {
 			msg = "200";
 		}
 		inputStream = new ByteArrayInputStream(msg.getBytes("UTF-8"));
 		return SUCCESS;
 	}
-	
-	//退出登录
+
+	// 退出登录
 	public String exit() {
 		session.removeAttribute("Admin");
 		return SUCCESS;
 	}
 
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
 }

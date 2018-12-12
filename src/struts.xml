@@ -3,6 +3,10 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
+	<constant name="struts.enable.DynamicMethodInvocation"
+		value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.maxSize" value="10000000" />
 	<package name="strutsBean" extends="struts-default"
 		namespace="/">
 		<action name="login" class="volunteer.action.AdminAction"
@@ -22,16 +26,108 @@
 			method="exit">
 			<result name="success" type="redirect">/Admin/index.jsp</result>
 		</action>
-		<action name="isRegister" class="volunteer.action.FrontAction" method="isRegister"/>
-		<action name="insertUserMess" class="volunteer.action.FrontAction" method="insertUserMess"/>
-		<action name="viewActivity" class="volunteer.action.FrontAction" method="viewActivity"/>
-		<action name="viewApply" class="volunteer.action.FrontAction" method="viewApply"/>
-		<action name="apply" class="volunteer.action.FrontAction" method="apply"/>
-		<action name="searchManHour" class="volunteer.action.FrontAction" method="searchManHour"/>
-		<action name="isRegister" class="volunteer.action.FrontAction" method="isRegister"/>
-		<action name="cancelApply" class="volunteer.action.FrontAction" method="cancelApply"/>
-		<action name="updateUserMess" class="volunteer.action.FrontAction" method="updateUserMess"/>
-		<action name="userMess" class="volunteer.action.FrontAction" method="userMess"/>
+		<action name="uploadImage" class="volunteer.action.FileAction"
+			method="uploadImage">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="addActivity"
+			class="volunteer.action.ActivityAction" method="addActivity">
+			<result name="success" type="stream">
+				<param name="contentType">text/html; charset=utf-8</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="myActivity"
+			class="volunteer.action.ActivityAction" method="myActivity">
+			<result name="success">/Admin/myActivity.jsp</result>
+		</action>
+		<action name="endNotUp" class="volunteer.action.ActivityAction"
+			method="endNotUp">
+			<result name="success">/Admin/uploadVtime.jsp</result>
+		</action>
+		<action name="showActivity"
+			class="volunteer.action.ActivityAction" method="showActivity">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="deleteActivity"
+			class="volunteer.action.ActivityAction" method="deleteActivity">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="excelJobState"
+			class="volunteer.action.ExportAction" method="actJobState">
+			<result name="excel" type="stream">
+				<param name="contentType">
+					application/vnd.ms-excel
+				</param>
+				<param name="inputName">excelStream</param>
+				<param name="contentDisposition">
+					attachment;filename="${downloadFileName}"
+				</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+		<action name="uploadVtime" class="volunteer.action.FileAction"
+			method="uploadVtime">
+			<result type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="setState"
+			class="volunteer.action.ActivityAction" method="setState">
+			<result name="success" type="stream">
+				<param name="contentType">text/html; charset=utf-8</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="endAndUp" class="volunteer.action.ActivityAction"
+			method="endAndUp">
+			<result name="success">/Admin/alterVtime.jsp</result>
+		</action>
 		
+		<action name="vtimeDetail" class="volunteer.action.VtimeAction"
+			method="vtimeDetail">
+			<result name="success" type="stream">
+				<param name="contentType">text/html; charset=utf-8</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="vtimeDelete" class="volunteer.action.VtimeAction"
+			method="vtimeDelete">
+			<result name="success" type="stream">
+				<param name="contentType">text/html; charset=utf-8</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="alterVtime" class="volunteer.action.VtimeAction"
+			method="alterVtime">
+			<result name="success" type="stream">
+				<param name="contentType">text/html; charset=utf-8</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="addVtime" class="volunteer.action.VtimeAction"
+			method="addVtime">
+			<result name="success" type="stream">
+				<param name="contentType">text/html; charset=utf-8</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		<action name="vtimeSearch" class="volunteer.action.VtimeAction"
+			method="vtimeSearch">
+			<result name="success" type="stream">
+				<param name="contentType">text/html; charset=utf-8</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
 	</package>
 </struts>

@@ -119,7 +119,7 @@
                 <h4 class="modal-title">更改密码</h4>
             </div>
             <div class="modal-body text-center">
-            	<form class="form-horizontal" action="">
+            	<form class="form-horizontal">
             		<div class="form-group">
 					    <label for="firstname" class="col-xs-2 control-label">身份证号</label>
 					    <div class="col-xs-10">

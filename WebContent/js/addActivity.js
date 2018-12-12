@@ -240,16 +240,15 @@ $(document).ready(function(){
 			return;
 		}
 		var joball=0;
-		var formData = new FormData();
-        formData.append("myfile", document.getElementById("uploadImage").files[0]);  
+		var formData = new FormData($("#form")[0]);
         $.ajax({
-    		url:"../pictureUpload",
+    		url:"/Volunteer/uploadImage",  
     		type:"post",
-    		cache:false,
     		data:formData,
     		contentType: false,
             processData: false,
-    		success:function(data){
+            dataType:"text",
+    		success:function(data){ 
     			var str="{'activity':[";
     			for(var i=0;i<Aintime.length;i++){
     				str+="{"+
@@ -257,6 +256,7 @@ $(document).ready(function(){
     						"'Adate':'"+Adate+"',"+
     						"'Address':'"+Address+"',"+
     						"'Adeadline':'"+Adeadline+"',"+
+    						"'picture':'"+data+"',"+
     						"'lng':'"+lng+"',"+
     						"'lat':'"+lat+"',"+
     						"'Atime':'"+Aintime[i]+"-"+Aouttime[i]+"',";
@@ -289,20 +289,28 @@ $(document).ready(function(){
     			}
     			str+="]}";
     			$.ajax({
-    	    		url:"../addActivityServlet",
+    	    		url:"/Volunteer/addActivity",
     	    		type:"post",
     	    		cache:false,
     	    		data:{
-    	    			'data':str
+    	    			'jsonData':str
     	    		},
+    	            dataType:"text",
     	    		success:function(data){
+    	    			//alert(data);
     	    			$("#result").text(data);
     	    			$('#myModal').modal('show');
-    	    		    setTimeout(function(){
+    	    		    setTimeout(function(){  
     	    		        $("#myModal").modal("hide")
     	    		    },1200);
+    	    		},
+    	    		error:function(xhr){
+    	    			alert('出错。。\n'+xhr.responseText);
     	    		}
     	    	});
+    		},
+    		error:function(xhr){
+    			alert('出错。。\n'+xhr.responseText);
     		}
     	});
 		
