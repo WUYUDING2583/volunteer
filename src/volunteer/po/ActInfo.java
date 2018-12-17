@@ -10,12 +10,12 @@ public class ActInfo extends ActBase implements Serializable{
 	private String college;
 	private double lng;//经度
 	private double lat;//纬度
-	private Set actreqs;
-	public Set getActreqs() {
+	private Set<ActReq> actreqs;
+	public Set<ActReq> getActreqs() {
 		return actreqs;
 	}
 
-	public void setActreqs(Set actreqs) {
+	public void setActreqs(Set<ActReq> actreqs) {
 		this.actreqs = actreqs;
 	}
 

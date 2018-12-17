@@ -1,11 +1,12 @@
 package volunteer.service;
 
+import volunteer.dao.AdminDAO;
 import volunteer.po.Admin;
 
 public class AdminService {
 	
-	private Admin admin;
-	
+	private Admin admin=new Admin();
+	private AdminDAO dao=new AdminDAO();
 	
 	/*
 	 * @管理员登陆
@@ -17,9 +18,7 @@ public class AdminService {
 	 * admin.setAccount("wrong");
 	 */
 	public Admin login(String account,String password) {
-		admin.setAccount(account);
-		admin.setCollege("计算机");
-		admin.setOrg("浙江工业大学");
+		admin=dao.login(account,password);
 		return admin;
 	}
 	
@@ -31,6 +30,8 @@ public class AdminService {
 	 * 修改失败返回false
 	*/
 	public boolean alterPsw(String id,String password) {
+		if(dao.alterPsw(id,password).equals("success"))
 		return true;
+		else return false;
 	}
 }

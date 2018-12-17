@@ -35,7 +35,7 @@ import volunteer.modal.Admin;
 import volunteer.modal.User;
 
 
-public class AdminDao extends BaseDao{
+public class AdminD extends BaseDao{
 	
 	private static final String LOGIN_WRONGMSG = "用户名或密码错误";
 	 // 上传文件存储目录

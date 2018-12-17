@@ -1,11 +1,14 @@
 package volunteer.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import com.google.gson.Gson;
 
+import volunteer.dao.ActivityDAO;
 import volunteer.po.ActInfo;
 import volunteer.po.ActReq;
 import volunteer.po.ActReqPK;
@@ -17,6 +20,7 @@ public class ActivityService {
 	private List list=new ArrayList<>();
 	private ActInfo info=new ActInfo();
 	private List reqList=new ArrayList<>();
+	private ActivityDAO dao=new ActivityDAO();
 	
 	
 	/*
@@ -48,9 +52,10 @@ public class ActivityService {
 	 * 添加成功返回true
 	 * 添加失败返回false
 	 */
-	public boolean addActivity(ActInfo info,ArrayList<ActReq> reqList,String college) {
-		
-		return true;
+	public boolean addActivity(ActInfo info) {
+		if(dao.addActivity(info)!=null)
+			return true;
+		else return false;
 	}
 	
 	/*
@@ -60,28 +65,7 @@ public class ActivityService {
 	 */
 	public List getActInfoList(String college){
 		
-		ActInfo t1=new ActInfo();
-		t1.setAno("1");
-		t1.setAname("1");
-		t1.setPublishName("1");
-		t1.setPublishTime("1");
-		t1.setAstate("正在进行");
-		System.out.println(t1.getAno());
-		list.add(t1);
-		ActInfo t2=new ActInfo();
-		t2.setAno("2");
-		t2.setAname("2");
-		t2.setPublishName("2");
-		t2.setPublishTime("2");
-		t2.setAstate("正在进行");
-		list.add(t2);
-		ActInfo t3=new ActInfo();
-		t3.setAno("3");
-		t3.setAname("3");
-		t3.setPublishName("3");
-		t3.setPublishTime("3");
-		t3.setAstate("正在进行");
-		list.add(t3);
+		list=dao.getActInfoList(college);
 		return list;
 	}
 
@@ -91,19 +75,7 @@ public class ActivityService {
 	 * 按照方法内部的格式返回
 	 */
 	public String getActInfo(String Ano) {
-		info.setAdate("1111");
-		info.setAddress("1111");
-		info.setAdeadline("12313");
-		info.setAname("123");
-		info.setAno(Ano);
-		info.setArequest("asdfasdf");
-		info.setAstate("asdfs");
-		info.setCollege("asdfasf");
-		info.setLat(123.234);
-		info.setLng(123.123);
-		info.setPublishName("asdfa");
-		info.setPublishTime("asdf");
-		info.setState(1);
+		info=dao.getActInfo(Ano);
 		Gson gson=new Gson();
 		return gson.toJson(info);
 	}
@@ -135,7 +107,7 @@ public class ActivityService {
 	 * 删除失败返回0
 	*/
 	public String deleteActivity(String Ano) {
-		return "1";
+		return dao.deleteActivity(Ano);
 	}
 	
 	
@@ -146,20 +118,7 @@ public class ActivityService {
 	 * 
 	 */
 	public List endAndUp(String college) {
-		info.setAno("123123123");
-		info.setAdate("2018-06-01");
-		info.setAddress("1111");
-		info.setAdeadline("12313");
-		info.setAname("123");
-		info.setArequest("asdfasdf");
-		info.setAstate("asdfs");
-		info.setCollege("asdfasf");
-		info.setLat(123.234);
-		info.setLng(123.123);
-		info.setPublishName("asdfa");
-		info.setPublishTime("asdf");
-		info.setState(1);
-		list.add(info);
+		dao.endAndUp(college);
 		return list;
 	}
 	
@@ -169,20 +128,24 @@ public class ActivityService {
 	 * 按照方法内部的格式返回
 	*/
 	public List endNotUp(String college) {
-		info.setAno("123123123");
-		info.setAdate("2018-06-01");
-		info.setAddress("1111");
-		info.setAdeadline("12313");
-		info.setAname("123");
-		info.setArequest("asdfasdf");
-		info.setAstate("asdfs");
-		info.setCollege("asdfasf");
-		info.setLat(123.234);
-		info.setLng(123.123);
-		info.setPublishName("asdfa");
-		info.setPublishTime("asdf");
-		info.setState(1);
-		list.add(info);
+		List temp=dao.endNotUp(college);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		java.util.Date now = new java.util.Date();
+		for(int i=0;i<temp.size();i++)
+		{
+			info=(ActInfo) temp.get(i);
+			String date=info.getAdate().trim();
+			java.util.Date acttime;
+			try 
+			{
+				acttime = sdf.parse(date);
+				if(now.after(acttime))
+				list.add(info);	
+			} 
+			catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 		return list;
 	}
 	
@@ -193,6 +156,8 @@ public class ActivityService {
 	 * 设置失败返回false
 	 */
 	public boolean setState(String Ano) {
+		if(dao.setState(Ano).equals("success"))
 		return true;
+		else return false;
 	}
 }

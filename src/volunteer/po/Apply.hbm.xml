@@ -13,5 +13,9 @@
 		<property name="Aname" type="string">
 			<column name="Aname" />
 		</property>
+		<many-to-one name="user" class="volunteer.po.User"
+			fetch="select" unique="true">
+			<column name="No" />
+		</many-to-one>
 	</class>
 </hibernate-mapping>

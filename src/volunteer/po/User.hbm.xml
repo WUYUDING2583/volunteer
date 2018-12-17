@@ -31,5 +31,14 @@
 		<property name="openid" type="string">
 			<column name="openid" />
 		</property>
+		<set name="manhours" inverse="false" cascade="all" lazy="true">
+			<key column="No" />
+			<one-to-many class="cn.edu.zjut.po.ManHour" />
+		</set>
+		<set name="applies" inverse="false" cascade="all" lazy="true">
+			<key column="No" />
+			<one-to-many class="cn.edu.zjut.po.Apply" />
+		</set>
+
 	</class>
 </hibernate-mapping>

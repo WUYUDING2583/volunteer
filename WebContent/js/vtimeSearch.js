@@ -9,7 +9,7 @@ $(document).ready(function(){
     		type:"post",
     		cache:false,
     		data:{
-    			'user.No':No
+    			'manhour.No':No
     		},
     		success:function(data){
     			var detail=eval("("+data+")");

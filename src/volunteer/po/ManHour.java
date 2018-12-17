@@ -9,36 +9,27 @@ public class ManHour implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	public ManHour() {
-		// TODO 自动生成的构造函数存根
+		pk=new ManHourPK();
 	}
-	private String No;
-	private String Aname;
-	private String Adate;
+	private User user;
+	private ManHourPK pk;
 	private float Avtime;
-	public ManHour(String no, String aname, String adate, float avtime) {
+	public ManHour(String no,String aname, String adate, float avtime) {
 		super();
-		No = no;
-		Aname = aname;
-		Adate = adate;
+		pk=new ManHourPK(no,aname,adate);
 		Avtime = avtime;
 	}
-	public String getNo() {
-		return No;
+	public ManHourPK getPk() {
+		return pk;
 	}
-	public void setNo(String no) {
-		No = no;
+	public void setPk(ManHourPK pk) {
+		this.pk = pk;
 	}
-	public String getAname() {
-		return Aname;
+	public User getUser() {
+		return user;
 	}
-	public void setAname(String aname) {
-		Aname = aname;
-	}
-	public String getAdate() {
-		return Adate;
-	}
-	public void setAdate(String adate) {
-		Adate = adate;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public float getAvtime() {
 		return Avtime;

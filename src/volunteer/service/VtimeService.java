@@ -3,12 +3,14 @@ package volunteer.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import volunteer.dao.VtimeDAO;
 import volunteer.po.ManHour;
+import volunteer.po.ManHourPK;
 import volunteer.po.User;
 
 public class VtimeService {
 	private List userList = new ArrayList<>();
-	
+	private VtimeDAO dao; 
 	/*
 	 * @根据学号查询该学号所有工时记录
 	 * 传入参数 No 学号
@@ -16,15 +18,7 @@ public class VtimeService {
 	 * 数据格式按照方法内
 	 */
 	public List vtimeSearch(String No) {
-		for (int i = 0; i < 4; i++) {
-			User user = new User();
-			user.setName("No" + i);
-			user.setVtime(i + 5);
-			user.setAdate("2018-12-10");
-			user.setAname("略略略");
-			userList.add(user);
-		}
-		return userList;
+		return userList=dao.vtimeSearch(No);
 	}
 
 	/*
@@ -38,8 +32,12 @@ public class VtimeService {
 	 * 添加成功返回该学号所有人的姓名
 	 * 添加失败 返回 "no"
 	 */
-	public String addVtime(String Aname, String Adate, String No, float vtime) {
-		return "Dominic";
+	public String addVtime(ManHour manhour) {
+		User user=dao.addVtime(manhour).getUser();
+		if( user!= null)
+			return user.getName();
+		else
+		return "no";
 	}
 
 	/*
@@ -51,8 +49,10 @@ public class VtimeService {
 	 * 修改成功返回true
 	 * 修改失败返回false
 	 */
-	public boolean alertVtime(String Aname, String Adate, String No, float vtime) {
-		return true;
+	public boolean alertVtime(ManHour manhour) {
+		if(dao.alterVtime(manhour).equals("success"))
+			return true;
+		else return false;
 	}
 
 	/*
@@ -63,8 +63,10 @@ public class VtimeService {
 	 * 删除成功返回 true
 	 * 删除失败返回false
 	 */
-	public boolean vtimeDelete(String Aname, String Adate, String No) {
-		return true;
+	public boolean vtimeDelete(ManHourPK pk) {
+		if(dao.vtimeDelete(pk).equals("success"))
+			return true;
+		else return false;
 	}
 
 	/*
@@ -74,16 +76,9 @@ public class VtimeService {
 	 * 查找成功 返回数据按照方法内格式
 	 * 查找失败返回null
 	 */
-	public List vtimeDetail(String Aname, String Adate) {
-		for (int i = 0; i < 4; i++) {
-			User user = new User();
-			user.setName("No" + i);
-			user.setNo("20161621123" + i);
-			user.setVtime(i + 5);
-			user.setAdate(Adate);
-			user.setAname(Aname);
-			userList.add(user);
-		}
+	public List vtimeDetail(String Aname, String Adate) 
+	{
+		userList=dao.vtimeDetail(Aname, Adate);
 		return userList;
 	}
 }

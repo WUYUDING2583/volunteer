@@ -15,11 +15,11 @@
 		<property name="DoneAccount" type="integer">
 			<column name="DoneAccount" />
 		</property>
-		<!--  
+		 
 		<many-to-one name="act" class="volunteer.po.ActInfo"
 			fetch="select" unique="true">
 			<column name="Ano" />
 		</many-to-one>
-		-->
+		
 	</class>
 </hibernate-mapping>

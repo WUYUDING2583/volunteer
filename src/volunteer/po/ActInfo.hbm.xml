@@ -46,11 +46,11 @@
 		<property name="lat" type="double">
 			<column name="lat" />
 		</property>
-		<!--  
-		<set name="actreqs" inverse="true" cascade="all" lazy="false">
+		 
+		<set name="actreqs" inverse="true" cascade="all" lazy="true">
 			<key column="Ano" />
 			<one-to-many class="volunteer.po.ActReq" />
 		</set>
-		-->
+		
 	</class>
 </hibernate-mapping>

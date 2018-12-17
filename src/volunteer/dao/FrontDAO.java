@@ -218,7 +218,7 @@ public class FrontDAO extends BaseHibernateDAO {
 		String queryString = "from ManHour as manhour where No="+No;
 		Query queryObject = session.createQuery(queryString);
 		tran.commit();
-		List result=queryObject.list();
+		List result=queryObject.list(); 
 		session.flush();
 		session.close();
 		return result;

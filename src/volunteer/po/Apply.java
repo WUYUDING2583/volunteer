@@ -8,6 +8,13 @@ public class Apply implements Serializable{
 	private static final long serialVersionUID = 1L;
 	public Apply() {
 	}
+	private User user;
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	private ApplyPK pk;
 	private String Aname;
 	private String state;

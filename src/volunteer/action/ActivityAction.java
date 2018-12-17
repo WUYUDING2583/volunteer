@@ -7,7 +7,9 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +35,10 @@ import volunteer.service.FileService;
 
 public class ActivityAction extends ActionSupport {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final static String SUCCESS = "success";
 	private final static String FAIL = "fail";
 
@@ -90,7 +96,7 @@ public class ActivityAction extends ActionSupport {
 	public String showActivity() {
 		String Ano = info.getAno();
 		ActivityService actSer = new ActivityService();
-		message = actSer.getActInfo(Ano) + "|" + actSer.getActReq(Ano);
+		message = actSer.getActInfo(Ano);
 		try {
 			inputStream = new ByteArrayInputStream(message.getBytes("UTF-8"));
 		} catch (UnsupportedEncodingException e) {
@@ -116,7 +122,7 @@ public class ActivityAction extends ActionSupport {
 		String Ano = actSer.getRandomString();
 		Admin admin = (Admin) session.getAttribute("Admin");
 		String college = admin.getCollege();
-		ArrayList<ActReq> reqList = new ArrayList<ActReq>();
+		Set<ActReq> reqList=new HashSet<ActReq>();
 		info.setAno(Ano);
 		String message = null;
 		String temp_str = "";
@@ -156,11 +162,13 @@ public class ActivityAction extends ActionSupport {
 					req.setAjobcount(obj.get("Ajobcount").getAsInt());
 					reqList.add(req);
 				}
+				info.setActreqs(reqList);
+				info.setCollege(college);
 			}
 			Gson gson = new Gson();
 			System.out.println("info:" + gson.toJson(info));
 			System.out.println("reqList:" + gson.toJson(reqList));
-			if (actSer.addActivity(info, reqList, college))
+			if (actSer.addActivity(info))
 				message = "活动添加成功";
 			else
 				message = "活动添加失败，系统错误";

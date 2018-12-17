@@ -13,9 +13,9 @@ $(document).ready(function(){
     		type:"post",
     		cache:false,
     		data:{
-    			'user.Aname':Aname,
-    			'user.Adate':Adate,
-    			'user.No':No
+    			'manhour.Aname':Aname,
+    			'manhour.Adate':Adate,
+    			'manhour.No':No
     		},
     		success:function(data){
     			if(data!="0"){
@@ -50,10 +50,10 @@ $(document).ready(function(){
 	    		type:"post",
 	    		cache:false,
 	    		data:{
-	    			'user.Aname':Aname,
-	    			'user.Adate':Adate,
-	    			'user.No':No,
-	    			'user.vtime':vtime
+	    			'manhour.Aname':Aname,
+	    			'manhour.Adate':Adate,
+	    			'manhour.No':No,
+	    			'manhour.vtime':vtime
 	    		},
 	    		success:function(data){
 	    			if(data!="0"){
@@ -74,8 +74,8 @@ $(document).ready(function(){
     		type:"post",
     		cache:false,
     		data:{
-    			'user.Aname':Aname,
-    			'user.Adate':Adate
+    			'manhour.Aname':Aname,
+    			'manhour.Adate':Adate
     		},
     		success:function(data){
     			var detail=eval("("+data+")");
@@ -113,10 +113,10 @@ $(document).ready(function(){
     		type:"post",
     		cache:false,
     		data:{
-    			'user.No':No,
-    			'user.Avtime':vtime,
-    			'user.Aname':Aname,
-    			'user.Adate':Adate
+    			'manhour.No':No,
+    			'manhour.Avtime':vtime,
+    			'manhour.Aname':Aname,
+    			'manhour.Adate':Adate
     		},
     		success:function(data){
     			if(data!="no"){
