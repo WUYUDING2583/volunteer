@@ -15,14 +15,28 @@ public class ExportDAO extends BaseHibernateDAO {
 	}
 	public List getApplyList(String Ano)
 	{
+		List result = null;
+		try
+		{
+			
 		Session session=getSession();
 		Transaction tran=session.beginTransaction();
-		String hql="from Apply as a where a.Ano='"+Ano+"'";
-		Query queryObject = session.createQuery(hql);
+		String hql="from Apply as a where a.pk.Ano='"+Ano+"'";
+		Query queryObject = session.createQuery(hql).setMaxResults(30);
+		result= queryObject.list();
+		System.out.println("EXPORTDAO:"+result.size());
 		tran.commit();
-		List result= queryObject.list();
+		System.out.println("EXPORTDAO");
+		
 		session.flush();
 		session.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println("ERROR");
+		}
+		
 		return result;
 	}
 }

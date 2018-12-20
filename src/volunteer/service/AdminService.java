@@ -19,6 +19,7 @@ public class AdminService {
 	 */
 	public Admin login(String account,String password) {
 		admin=dao.login(account,password);
+		System.out.println(admin.getAccount());
 		return admin;
 	}
 	

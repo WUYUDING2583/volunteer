@@ -18,6 +18,7 @@ public class VtimeService {
 	 * 数据格式按照方法内
 	 */
 	public List vtimeSearch(String No) {
+		System.out.println("根据学号查询该学号所有工时记录");
 		return userList=dao.vtimeSearch(No);
 	}
 
@@ -33,6 +34,7 @@ public class VtimeService {
 	 * 添加失败 返回 "no"
 	 */
 	public String addVtime(ManHour manhour) {
+		System.out.println("根据活动日期名称添加工时记录");
 		User user=dao.addVtime(manhour).getUser();
 		if( user!= null)
 			return user.getName();
@@ -50,6 +52,7 @@ public class VtimeService {
 	 * 修改失败返回false
 	 */
 	public boolean alertVtime(ManHour manhour) {
+		System.out.println("根据活动名称日期学号，修改工时");
 		if(dao.alterVtime(manhour).equals("success"))
 			return true;
 		else return false;
@@ -64,6 +67,7 @@ public class VtimeService {
 	 * 删除失败返回false
 	 */
 	public boolean vtimeDelete(ManHourPK pk) {
+		System.out.println("根据活动名称日期学号删除工时记录");
 		if(dao.vtimeDelete(pk).equals("success"))
 			return true;
 		else return false;
@@ -78,6 +82,7 @@ public class VtimeService {
 	 */
 	public List vtimeDetail(String Aname, String Adate) 
 	{
+		System.out.println("根据活动名称活动日期返回活动所有工时信息");
 		userList=dao.vtimeDetail(Aname, Adate);
 		return userList;
 	}

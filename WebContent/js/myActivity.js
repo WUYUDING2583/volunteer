@@ -16,8 +16,8 @@ $(document).ready(function(){
     		},
     		success:function(data){
     			var jsonArr=new Array();
-    			arr=data.split("|");
-    			var info=eval("("+arr[0]+")");
+    			//$("html").html(data);
+    			var info=eval("("+data+")");
     			$(".modal-title").text(info.Aname);
     			var $str="<table class='table table-bordered table-hover'>"+
     						"<tbody>"+
@@ -31,7 +31,7 @@ $(document).ready(function(){
     								"<td>活动地址</td>"+
     								"<td>"+info.Address+"</td>"+
         						"</tr><tr>";
-    			var req=eval("("+arr[1]+")");
+    			var req=info.ActReq;
     			var prevTime="";
     			for(var i=0;i<req.length;i++){
     				if(req[i].Atime!=prevTime){

@@ -57,6 +57,7 @@ public class ActivityAction extends ActionSupport {
 
 	// 将活动状态设置为已上传工时表
 	public String setState() {
+		System.out.println("将活动状态设置为已上传工时表");
 		ActivityService actSer = new ActivityService();
 		String Ano=info.getAno();
 		if (actSer.setState(Ano))
@@ -68,6 +69,7 @@ public class ActivityAction extends ActionSupport {
 
 	// 获取某学院已上传工时活动列表
 	public String endAndUp() {
+		System.out.println("获取某学院已上传工时活动列表");
 		Admin admin = (Admin) session.getAttribute("Admin");
 		ActivityService actSer = new ActivityService();
 		String college=admin.getCollege();
@@ -77,6 +79,7 @@ public class ActivityAction extends ActionSupport {
 
 	// 获取某学院已结束但未上传工时表的活动列表
 	public String endNotUp() {
+		System.out.println("获取某学院已结束但未上传工时表的活动列表");
 		Admin admin = (Admin) session.getAttribute("Admin");
 		ActivityService actSer = new ActivityService();
 		String college=admin.getCollege();
@@ -86,7 +89,9 @@ public class ActivityAction extends ActionSupport {
 
 	// 根据活动编号删除活动
 	public String deleteActivity() {
+		
 		String Ano = info.getAno();
+		System.out.println("根据活动编号删除活动:"+Ano);
 		ActivityService actSer = new ActivityService();
 		message = actSer.deleteActivity(Ano);
 		return SUCCESS;
@@ -94,6 +99,7 @@ public class ActivityAction extends ActionSupport {
 
 	// 根据活动编号查看活动具体信息
 	public String showActivity() {
+		System.out.println("根据活动编号查看活动具体信息");
 		String Ano = info.getAno();
 		ActivityService actSer = new ActivityService();
 		message = actSer.getActInfo(Ano);
@@ -103,11 +109,13 @@ public class ActivityAction extends ActionSupport {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("message:"+message);
 		return SUCCESS;
 	}
 
 	// 查看所有活动
 	public String myActivity() {
+		System.out.println("查看所有活动");
 		Admin admin = (Admin) session.getAttribute("Admin");
 		ActivityService actSer = new ActivityService();
 		String college=admin.getCollege();
@@ -117,6 +125,7 @@ public class ActivityAction extends ActionSupport {
 
 	// 添加活动
 	public String addActivity() {
+		System.out.println("添加活动");
 		ActInfo info = new ActInfo();
 		ActivityService actSer = new ActivityService();
 		String Ano = actSer.getRandomString();

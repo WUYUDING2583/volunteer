@@ -27,9 +27,18 @@ public class VtimeAction {
 	private String message;
 
 	//根据学号查询工时记录
-	public String vtimeSearch() {
-		String No=manhour.getPk().getNo();
-		System.out.println("No:"+No);
+	public String vtimeSearch() 
+	{
+		String No="";
+		System.out.println("根据学号查询工时记录:");
+		
+		try
+		{System.out.println("No:"+manhour.getPk().getNo());
+			No=manhour.getPk().getNo();
+			System.out.println("No:"+No);
+		}
+		catch(Exception e) {e.printStackTrace();}
+		
 		VtimeService vtimeSer = new VtimeService();
 		manhourList=vtimeSer.vtimeSearch(No);
 		Gson gson=new Gson();
@@ -44,6 +53,7 @@ public class VtimeAction {
 	
 	//根据活动日期名称添加工时记录
 	public String addVtime() {
+		System.out.println("根据活动日期名称添加工时记录");
 		String Aname = manhour.getPk().getAname();
 		String Adate = manhour.getPk().getAdate();
 		String No = manhour.getPk().getNo();
@@ -61,6 +71,7 @@ public class VtimeAction {
 	}
 	//根据活动名称日期学号，修改工时
 	public String alterVtime() {
+		System.out.println("根据活动名称日期学号，修改工时");
 		String Aname = manhour.getPk().getAname();
 		String Adate = manhour.getPk().getAdate();
 		String No = manhour.getPk().getNo();
@@ -83,6 +94,7 @@ public class VtimeAction {
 	}
 	// 根据活动名称日期学号删除工时记录
 	public String vtimeDelete() {
+		System.out.println("根据活动名称日期学号删除工时记录");
 		String Aname = manhour.getPk().getAname();
 		String Adate = manhour.getPk().getAdate();
 		String No = manhour.getPk().getNo();
@@ -104,6 +116,7 @@ public class VtimeAction {
 
 	// 根据活动名称日期返回该活动所有志愿者工时信息
 	public String vtimeDetail() {
+		System.out.println("根据活动名称日期返回该活动所有志愿者工时信息");
 		VtimeService vtimeSer = new VtimeService();
 		String Aname = manhour.getPk().getAname();
 		String Adate = manhour.getPk().getAdate();

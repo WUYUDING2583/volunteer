@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.json.JSONObject;
+
 import com.google.gson.Gson;
 
 import volunteer.dao.ActivityDAO;
@@ -66,6 +68,35 @@ public class ActivityService {
 	public List getActInfoList(String college){
 		
 		list=dao.getActInfoList(college);
+		List temp=dao.endNotUp(college);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		java.util.Date now = new java.util.Date();
+		System.out.println("查找college的所有活动:"+((ActInfo)list.get(0)).getAname());
+		for(int i=0;i<list.size();i++)
+		{
+			info=(ActInfo) list.get(i);
+			String date=info.getAdate().trim();
+			java.util.Date acttime;
+			try
+			{
+				acttime = sdf.parse(date);
+				if(now.after(acttime))
+				{
+					info.setAstate("已结束");
+				}
+				else if(now.before(acttime))
+				{
+					info.setAstate("未开始");
+				}
+				else
+					info.setAstate("正在进行");
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+		}
 		return list;
 	}
 
@@ -75,9 +106,25 @@ public class ActivityService {
 	 * 按照方法内部的格式返回
 	 */
 	public String getActInfo(String Ano) {
+		System.out.println("GETACTINFOSERVICE:"+Ano);
 		info=dao.getActInfo(Ano);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date=info.getAdate().trim();
+		java.util.Date acttime = null;
+		try {
+			acttime = sdf.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		info.setAdate(sdf.format(acttime));
+		System.out.println("已招："+info.getActreqs().iterator().next().getDoneAccount());
+		System.out.println("TESTSSSS:"+info.getAname());
 		Gson gson=new Gson();
-		return gson.toJson(info);
+		//JSONObject json=new JSONObject(info);
+		//json.put("act", info);
+		System.out.println("JSONSTRING:"+info.getActreqs().size());
+		System.out.println("JSONSSS:"+info.toJson());
+		return info.toJson();
 	}
 	
 	/*
@@ -107,6 +154,7 @@ public class ActivityService {
 	 * 删除失败返回0
 	*/
 	public String deleteActivity(String Ano) {
+		System.out.println("根据活动编号删除活动");
 		return dao.deleteActivity(Ano);
 	}
 	
@@ -118,7 +166,22 @@ public class ActivityService {
 	 * 
 	 */
 	public List endAndUp(String college) {
-		dao.endAndUp(college);
+		
+		list=dao.endAndUp(college);
+		System.out.println("返回活动已经结束且已经上传工时表的活动:"+list.size());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		for(int i=0;i<list.size();i++)
+		{
+			info=(ActInfo) list.get(i);
+			String date=info.getAdate().trim();
+			java.util.Date acttime = null;
+			try {
+				acttime = sdf.parse(date);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			info.setAdate(sdf.format(acttime));
+		}
 		return list;
 	}
 	
@@ -129,18 +192,24 @@ public class ActivityService {
 	*/
 	public List endNotUp(String college) {
 		List temp=dao.endNotUp(college);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date now = new java.util.Date();
 		for(int i=0;i<temp.size();i++)
 		{
 			info=(ActInfo) temp.get(i);
+			
 			String date=info.getAdate().trim();
-			java.util.Date acttime;
+			java.util.Date acttime = null;
 			try 
 			{
+				
 				acttime = sdf.parse(date);
+				
 				if(now.after(acttime))
-				list.add(info);	
+				{
+					list.add(info);	
+					info.setAdate(sdf.format(acttime));
+				}
 			} 
 			catch (ParseException e) {
 				e.printStackTrace();

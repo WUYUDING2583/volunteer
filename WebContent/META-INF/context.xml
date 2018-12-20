@@ -2,7 +2,7 @@
 <Context path="/lj_ManagementSystem" reloadable="true">
   <Resource 
       driverClassName="com.mysql.jdbc.Driver" 
-      maxActive="40" 
+      maxActive="80" 
       maxIdle="2" 
       maxWait="5000" 
       name="jdbc/sampleDS" 

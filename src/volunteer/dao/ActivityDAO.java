@@ -34,6 +34,7 @@ public class ActivityDAO extends BaseHibernateDAO {
 		Query queryObject = session.createQuery(hql);
 		tran.commit();
 		List result= queryObject.list();
+		
 		session.flush();
 		session.close();
 		return result;
@@ -41,10 +42,17 @@ public class ActivityDAO extends BaseHibernateDAO {
 	//获取活动信息
 	public ActInfo getActInfo(String Ano)
 	{
+		System.out.println("GETACTINFOSDAO");
+		
 		Session session=getSession();
 		Transaction tran=session.beginTransaction();
-		ActInfo result=(ActInfo) session.load(ManHour.class, Ano);
+		String hql="from ActInfo as a where a.Ano='"+Ano+"'";
+		Query queryObject=session.createQuery(hql);
+		ActInfo result=(ActInfo)(queryObject.list().get(0));
+		//ActInfo result=(ActInfo) session.get(ManHour.class, Ano);
 		tran.commit();
+		session.flush();
+		session.close();
 		return result;
 	}
 	//删除活动
@@ -54,11 +62,12 @@ public class ActivityDAO extends BaseHibernateDAO {
 		try
 		{
 			Session session=getSession();
-		Transaction tran=session.beginTransaction();
-		ActInfo temp=(ActInfo) session.load(ManHour.class, Ano);
-		session.delete(temp);
-		tran.commit();
-		result="1";
+			Transaction tran=session.beginTransaction();
+			ActInfo temp=(ActInfo) session.load(ActInfo.class, Ano);
+			System.out.println("DELETE:"+temp.getAname());
+			session.delete(temp);
+			tran.commit();
+			result="1";
 		}
 		catch(Exception e)
 		{
@@ -96,18 +105,25 @@ public class ActivityDAO extends BaseHibernateDAO {
 	public String setState(String Ano)
 	{
 		String result="fail";
+		Session session=getSession();
 		try
 		{
-			Session session=getSession();
+			
 			Transaction tran=session.beginTransaction();
 			ActInfo temp=(ActInfo)session.load(ActInfo.class, Ano);
 			temp.setState(1);
 			session.update(temp);
 			result="success";
+			
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
+		}
+		finally
+		{
+			session.flush();
+			session.close();
 		}
 		return result;
 	}

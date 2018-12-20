@@ -30,8 +30,9 @@ public class ExcelService {
 	 * 传入参数 file 上传的文件数据流
 	 * 从文件中获取的数据 list
 	 * 将list中的数据存储至数据库
-	 * 存储成功返回true
+	 * 存储成功设置该活动的state为1并返回true
 	 * 存储失败返回false
+	 * 
 	 */
 	private ExcelDAO dao=new ExcelDAO();
 	public boolean uploadVtime(File file) {

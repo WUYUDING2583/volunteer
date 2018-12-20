@@ -10,17 +10,31 @@ import volunteer.po.Admin;
 public class AdminDAO extends BaseHibernateDAO{
 
 	public AdminDAO() {
-		// TODO 自动生成的构造函数存根
+		session=getSession();
 	}
+	Session session;
 	//管理员登陆
 	public Admin login(String account,String password)
 	{
-		Session session=getSession();
-		Transaction tran=session.beginTransaction();
-		String hql="from Admin where account='"+account+"' and password='"+password+"'";
-		Query queryObject = session.createQuery(hql);
-		tran.commit();
-		Admin result=(Admin) queryObject.list().get(0);
+		Admin result=new Admin();
+		result.setAccount("wrong");
+		try
+		{
+			//Session session=getSession();
+			Transaction tran=session.beginTransaction();
+			String hql="from Admin where account='"+account+"' and password='"+password+"'";
+			Query queryObject = session.createQuery(hql);
+			tran.commit();
+			result=(Admin) queryObject.list().get(0);
+			session.flush();
+			session.clear();
+			
+		}
+		catch(Exception e) {e.printStackTrace();}
+		finally
+		{
+			session.close();
+		}
 		return result;
 	}
 	//修改密码
@@ -29,18 +43,30 @@ public class AdminDAO extends BaseHibernateDAO{
 		
 			String result="fail";
 			try
-			{
-				Session session=getSession();
+			{	
+				System.out.println("修改密码....");
+				//Session session=getSession();
 				Transaction tran=session.beginTransaction();
 				Admin temp=(Admin)session.load(Admin.class, id);
 				temp.setPassword(password);
+				System.out.println("Name:"+temp.getAccount());
 				session.update(temp);
+				tran.commit();
 				result="success";
+				session.flush();
+				session.clear();
+				
 			}
 			catch(Exception e)
 			{
+				System.out.println("更新密码出错");
 				e.printStackTrace();
 			}
+			finally
+			{
+				session.close();
+			}
+			
 			return result;
 	}
 }

@@ -7,6 +7,12 @@ public class Vtime implements Serializable {
 	private static final long serialVersionUID = 4208335001425955600L;
 	private float Allvtime;
 	private String name;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	private List<ManHour> manhour;
 	public List<ManHour> getManhour() {
 		return manhour;

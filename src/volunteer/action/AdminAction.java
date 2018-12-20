@@ -18,6 +18,10 @@ import volunteer.service.AdminService;
 
 public class AdminAction extends ActionSupport {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final static String SUCCESS = "success";
 	private final static String FAIL = "fail";
 
