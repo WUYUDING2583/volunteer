@@ -15,7 +15,7 @@ $(document).ready(function(){
     		data:{
     			'manhour.Aname':Aname,
     			'manhour.Adate':Adate,
-    			'manhour.No':No
+    			'pk.No':No
     		},
     		success:function(data){
     			if(data!="0"){
@@ -52,7 +52,7 @@ $(document).ready(function(){
 	    		data:{
 	    			'manhour.Aname':Aname,
 	    			'manhour.Adate':Adate,
-	    			'manhour.No':No,
+	    			'pk.No':No,
 	    			'manhour.vtime':vtime
 	    		},
 	    		success:function(data){
@@ -113,7 +113,7 @@ $(document).ready(function(){
     		type:"post",
     		cache:false,
     		data:{
-    			'manhour.No':No,
+    			'pk.No':No,
     			'manhour.Avtime':vtime,
     			'manhour.Aname':Aname,
     			'manhour.Adate':Adate

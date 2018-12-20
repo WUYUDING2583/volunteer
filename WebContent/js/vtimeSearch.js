@@ -9,7 +9,7 @@ $(document).ready(function(){
     		type:"post",
     		cache:false,
     		data:{
-    			'manhour.pk.No':No
+    			'pk.No':No
     		},
     		success:function(data){
     			var detail=eval("("+data+")");

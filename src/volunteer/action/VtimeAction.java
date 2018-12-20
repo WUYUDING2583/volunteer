@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 
 import volunteer.po.ActInfo;
 import volunteer.po.ManHour;
+import volunteer.po.ManHourPK;
 import volunteer.po.User;
 import volunteer.po.Vtime;
 import volunteer.service.VtimeService;
@@ -21,27 +22,28 @@ public class VtimeAction {
 	private ActInfo info;
 	private Vtime vtime;
 	private List manhourList;
-	//private User manhour;
+	// private User manhour;
 	private ManHour manhour;
+	private ManHourPK pk;
 	private InputStream inputStream;
 	private String message;
 
-	//根据学号查询工时记录
-	public String vtimeSearch() 
-	{
-		String No="";
+	// 根据学号查询工时记录
+	public String vtimeSearch() {
+		String No = "";
 		System.out.println("根据学号查询工时记录:");
-		
-		try
-		{System.out.println("No:"+manhour.getPk().getNo());
-			No=manhour.getPk().getNo();
-			System.out.println("No:"+No);
+
+		try {
+			System.out.println("No:" + pk.getNo());
+			No = pk.getNo();
+			System.out.println("No:" + No);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		catch(Exception e) {e.printStackTrace();}
-		
+
 		VtimeService vtimeSer = new VtimeService();
-		manhourList=vtimeSer.vtimeSearch(No);
-		Gson gson=new Gson();
+		manhourList = vtimeSer.vtimeSearch(No);
+		Gson gson = new Gson();
 		try {
 			inputStream = new ByteArrayInputStream(gson.toJson(manhourList).getBytes("UTF-8"));
 		} catch (UnsupportedEncodingException e) {
@@ -50,17 +52,17 @@ public class VtimeAction {
 		}
 		return SUCCESS;
 	}
-	
-	//根据活动日期名称添加工时记录
+
+	// 根据活动日期名称添加工时记录
 	public String addVtime() {
 		System.out.println("根据活动日期名称添加工时记录");
 		String Aname = manhour.getPk().getAname();
 		String Adate = manhour.getPk().getAdate();
-		String No = manhour.getPk().getNo();
-		float vtime=manhour.getAvtime();
-		System.out.println("Aname:" + Aname + "\nAdate:" + Adate+"\nNo:"+No+"\nvtime:"+vtime);
+		String No = pk.getNo();
+		float vtime = manhour.getAvtime();
+		System.out.println("Aname:" + Aname + "\nAdate:" + Adate + "\nNo:" + No + "\nvtime:" + vtime);
 		VtimeService vtimeSer = new VtimeService();
-		message =vtimeSer.addVtime(manhour);
+		message = vtimeSer.addVtime(manhour);
 		try {
 			inputStream = new ByteArrayInputStream(message.getBytes("UTF-8"));
 		} catch (UnsupportedEncodingException e) {
@@ -69,14 +71,16 @@ public class VtimeAction {
 		}
 		return SUCCESS;
 	}
-	//根据活动名称日期学号，修改工时
+
+	// 根据活动名称日期学号，修改工时
 	public String alterVtime() {
 		System.out.println("根据活动名称日期学号，修改工时");
 		String Aname = manhour.getPk().getAname();
 		String Adate = manhour.getPk().getAdate();
-		String No = manhour.getPk().getNo();
-		float vtime=manhour.getAvtime();
-		//System.out.println("Aname:" + Aname + "\nAdate:" + Adate+"\nNo:"+No+"\nvtime:"+vtime);
+		String No = pk.getNo();
+		float vtime = manhour.getAvtime();
+		// System.out.println("Aname:" + Aname + "\nAdate:" +
+		// Adate+"\nNo:"+No+"\nvtime:"+vtime);
 		VtimeService vtimeSer = new VtimeService();
 		if (vtimeSer.alertVtime(manhour)) {
 			message = "修改成功";
@@ -89,17 +93,17 @@ public class VtimeAction {
 			e.printStackTrace();
 		}
 		return SUCCESS;
-		
-		
+
 	}
+
 	// 根据活动名称日期学号删除工时记录
 	public String vtimeDelete() {
 		System.out.println("根据活动名称日期学号删除工时记录");
 		String Aname = manhour.getPk().getAname();
 		String Adate = manhour.getPk().getAdate();
-		String No = manhour.getPk().getNo();
-		float vtime=manhour.getAvtime();
-		//System.out.println("Aname:" + Aname + "\nAdate:" + Adate+"\nNo:"+No);
+		String No = pk.getNo();
+		float vtime = manhour.getAvtime();
+		// System.out.println("Aname:" + Aname + "\nAdate:" + Adate+"\nNo:"+No);
 		VtimeService vtimeSer = new VtimeService();
 		if (vtimeSer.vtimeDelete(manhour.getPk())) {
 			message = "删除成功";
@@ -179,4 +183,11 @@ public class VtimeAction {
 		return message;
 	}
 
+	public ManHourPK getPk() {
+		return pk;
+	}
+
+	public void setPk(ManHourPK pk) {
+		this.pk = pk;
+	}
 }
