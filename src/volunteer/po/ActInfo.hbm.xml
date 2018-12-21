@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD
+3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="volunteer.po.ActInfo" table="activityinfo" catalog="volunteer">
+		<id name="Ano" type="string">
+			<column name="Ano" />
+		</id>
+		<property name="Adate" type="string">
+			<column name="Adate" />
+		</property>
+		<property name="Aname" type="string">
+			<column name="Aname" />
+		</property>
+		<property name="Address" type="string">
+			<column name="Address" />
+		</property>
+		<property name="Arequest" type="string">
+			<column name="Arequest" />
+		</property>
+		<property name="publishTime" type="string">
+			<column name="publishTime" />
+		</property>
+		<property name="picture" type="string">
+			<column name="picture" />
+		</property>
+		<property name="state" type="integer">
+			<column name="state" />
+		</property>
+		<property name="publishName" type="string">
+			<column name="publishName" />
+		</property>
+		<property name="college" type="string">
+			<column name="college" />
+		</property>
+		<property name="org" type="string">
+			<column name="org" />
+		</property>
+		<property name="Adeadline" type="string">
+			<column name="Adeadline" />
+		</property>
+		<property name="lng" type="double">
+			<column name="lng" />
+		</property>
+		<property name="lat" type="double">
+			<column name="lat" />
+		</property>
+		 
+		<set name="actreqs" inverse="true" cascade="all" lazy="false">
+			<key column="Ano" />
+			<one-to-many class="volunteer.po.ActReq" />
+		</set>
+		
+	</class>
+</hibernate-mapping>
