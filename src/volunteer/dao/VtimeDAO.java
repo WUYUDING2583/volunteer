@@ -49,13 +49,16 @@ public class VtimeDAO extends BaseHibernateDAO{
 	{
 		Session session=getSession();
 		Transaction tran=session.beginTransaction();
+		System.out.println("添加工时");
+		System.out.println("No:"+manhour.getPk().getNo()+" Aname: "+manhour.getPk().getAname()+"  Adate:"+manhour.getPk().getAdate()+" Avtime: "+manhour.getAvtime());
 		session.save(manhour);
 		tran.commit();
 		tran=session.beginTransaction();
 		ManHour a = (ManHour)session.get(ManHour.class, manhour.getPk());
 		tran.commit();
-		session.close();
+		
 		session.clear();
+		
 		HibernateUtil.closeSession();
 		return a;
 	}
@@ -63,18 +66,18 @@ public class VtimeDAO extends BaseHibernateDAO{
 	public String alterVtime(ManHour manhour)
 	{
 		ManHourPK pk=manhour.getPk();
-		System.out.println("UPDATE VTIME:"+pk.getAdate());
+		
 		Session session=getSession();
 		try
 		{
 			Transaction tran=session.beginTransaction();
-		//String hql="UPDATE ManHour SET Avtime ="+ manhour.getAvtime()+" WHERE pk.No='"+pk.getNo()+"'and pk.Aname='"+pk.getAname()+"'and pk.Adate='"+pk.getAdate()+"'";
-		System.out.println("UPDATE VTIME:"+pk.getAdate());
+		
+		
 		ManHour temp=(ManHour) session.get(ManHour.class, pk);
 		temp.setAvtime(manhour.getAvtime());
-		System.out.println("UPDATE VTIME:"+pk.getAdate());
+	
 		session.save(temp);
-		//session.createQuery(hql).executeUpdate();
+		
 		tran.commit();
 		session.flush();
 		session.close();
@@ -86,7 +89,7 @@ public class VtimeDAO extends BaseHibernateDAO{
 	//根据活动名称日期学号删除工时记录
 	public String vtimeDelete(ManHourPK pk)
 	{
-		System.out.println("PK:"+pk.getAname());
+		System.out.println("根据活动名称日期学号删除工时记录-PK:Aname= "+pk.getAname()+"  Adate= "+pk.getAdate()+"  No="+pk.getNo());
 		Session session=getSession();
 		Transaction tran=session.beginTransaction();
 		ManHour temp=(ManHour) session.get(ManHour.class, pk);

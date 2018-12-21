@@ -12,8 +12,7 @@ $(document).ready(function(){
     			'pk.No':No
     		},
     		success:function(data){
-    			$("html").html(data);
-    			return;
+    			
     			var detail=eval("("+data+")");
     			var $str="";
     			var name=detail[0].Name;

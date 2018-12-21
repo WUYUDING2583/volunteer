@@ -54,6 +54,7 @@ public class VtimeService {
 	 */
 	public boolean alertVtime(ManHour manhour) {
 		System.out.println("根据活动名称日期学号，修改工时");
+		System.out.println(manhour.getAvtime());
 		if(dao.alterVtime(manhour).equals("success"))
 			return true;
 		else return false;

@@ -59,6 +59,7 @@ public class VtimeAction {
 		String Aname = pk.getAname();
 		String Adate = pk.getAdate();
 		String No = pk.getNo();
+		manhour.setPk(pk);
 		System.out.println("ANAME:"+Aname+"  ADATE:"+Adate+"  No:"+No);
 		if(manhour!=null)System.out.println("Aname");
 		if(manhour.getAvtime()==0)System.out.println("SFSSFSFS");
@@ -81,8 +82,10 @@ public class VtimeAction {
 		String Aname = pk.getAname();
 		String Adate = pk.getAdate();
 		String No = pk.getNo();
-		if(manhour!=null)System.out.println("ALTERVTIME");
+		if(manhour!=null)System.out.println(manhour.getAvtime());
+		System.out.println("ANAME:"+Aname+"  ADATE:"+Adate+"  No:"+No);
 		float vtime = manhour.getAvtime();
+		manhour.setPk(pk);
 		// System.out.println("Aname:" + Aname + "\nAdate:" +
 		// Adate+"\nNo:"+No+"\nvtime:"+vtime);
 		VtimeService vtimeSer = new VtimeService();
@@ -104,9 +107,6 @@ public class VtimeAction {
 	public String vtimeDelete() {
 		System.out.println("根据活动名称日期学号删除工时记录");
 		System.out.println("DELETE:"+pk.getAname()+"  "+pk.getAdate()+"  "+pk.getNo());
-		
-		float vtime = manhour.getAvtime();
-		// System.out.println("Aname:" + Aname + "\nAdate:" + Adate+"\nNo:"+No);
 		VtimeService vtimeSer = new VtimeService();
 		if (vtimeSer.vtimeDelete(pk)) {
 			message = "删除成功";
@@ -138,11 +138,11 @@ public class VtimeAction {
 		return SUCCESS;
 	}
 
-	public void setManHour(ManHour manhour) {
+	public void setManhour(ManHour manhour) {
 		this.manhour = manhour;
 	}
 
-	public ManHour getManHour() {
+	public ManHour getManhour() {
 		return manhour;
 	}
 

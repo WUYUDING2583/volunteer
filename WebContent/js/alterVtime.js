@@ -89,7 +89,7 @@ $(document).ready(function(){
 								"<th>工时</th>"+
 								"<th>操作</th></tr></thead><tbody>";
     			for(var i=0;i<detail.length;i++){
-    				$str+="<tr id='"+detail[i].pk.Aname+"/"+detail[i].pkAdate+"/"+detail[i].pk.No+"'><td class='Name'>"+detail[i].username+"</td><td class='No'>"+detail[i].pk.No+"</td><td class='vtime'>"+detail[i].Avtime+"</td>"+
+    				$str+="<tr id='"+detail[i].pk.Aname+"/"+detail[i].pk.Adate+"/"+detail[i].pk.No+"'><td class='Name'>"+detail[i].username+"</td><td class='No'>"+detail[i].pk.No+"</td><td class='vtime'>"+detail[i].Avtime+"</td>"+
     						"<td><a class='tooltip-test' data-toggle='tooltip' title='修改'>"+
 	      		"<span class='glyphicon glyphicon-pencil alterDetail'></span>"+
 	      	"</a>"+
