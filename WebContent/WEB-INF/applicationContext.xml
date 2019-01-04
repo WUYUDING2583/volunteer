@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName" default-lazy-init="true">
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://120.79.130.100:3306/volunteer?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="username" value="PMS" />
+		<property name="password" value="park" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>volunteer/po/ActBase.hbm.xml</value>
+				<value>volunteer/po/ActReq.hbm.xml</value>
+				<value>volunteer/po/Admin.hbm.xml</value>
+				<value>volunteer/po/Apply.hbm.xml</value>
+				<value>volunteer/po/ViewApply.hbm.xml</value>
+				<value>volunteer/po/ActInfo.hbm.xml</value>
+				<value>volunteer/po/User.hbm.xml</value>
+				<value>volunteer/po/ManHour.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="BaseDAO" class="volunteer.dao.BaseHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="activitydao" class="volunteer.dao.ActivityDAO" parent="BaseDAO"></bean>
+	<bean id="admindao" class="volunteer.dao.AdminDAO" parent="BaseDAO"></bean>
+	<bean id="exceldao" class="volunteer.dao.ExcelDAO" parent="BaseDAO"></bean>
+	<bean id="exportdao" class="volunteer.dao.ExportDAO" parent="BaseDAO"></bean>
+	<bean id="frontdao" class="volunteer.dao.FrontDAO" parent="BaseDAO"></bean>
+	<bean id="vtimedao" class="volunteer.dao.VtimeDAO" parent="BaseDAO"></bean>
+
+	<bean id="activityservice" class="volunteer.service.ActivityService">
+		<property name="dao" ref="activitydao"></property>
+	</bean>
+	<bean id="adminservice" class="volunteer.service.AdminService">
+		<property name="dao" ref="admindao"></property>
+	</bean>
+	<bean id="excelservice" class="volunteer.service.ExcelService">
+		<property name="dao" ref="exceldao"></property>
+	</bean>
+	<bean id="exportservice" class="volunteer.service.ExportService">
+		<property name="dao" ref="exportdao"></property>
+	</bean>
+	<bean id="fileservice" class="volunteer.service.FileService">
+		
+	</bean>
+	<bean id="frontservice" class="volunteer.service.FrontService">
+		<property name="dao" ref="frontdao"></property>
+	</bean>
+	<bean id="vtimeservice" class="volunteer.service.VtimeService">
+		<property name="dao" ref="vtimedao"></property>
+	</bean>
+
+	<bean id="111" class="volunteer.action.ActivityAction" scope="prototype">
+		<property name="activityservice" ref="activityservice" />
+	</bean>
+	<bean id="222" class="volunteer.action.AdminAction" scope="prototype">
+		<property name="adminservice" ref="adminservice" />
+	</bean>
+	<bean id="333" class="volunteer.action.ExportAction" scope="prototype">
+		<property name="exportservice" ref="exportservice" />
+	</bean>
+	<bean id="444" class="volunteer.action.FileAction" scope="prototype">
+		<property name="fileservice" ref="fileservice" />
+		<property name="excelservice" ref="excelservice" />
+	</bean>
+	<bean id="555" class="volunteer.action.FrontAction" scope="prototype">
+		<property name="frontservice" ref="frontservice" />
+	</bean>
+	<bean id="666" class="volunteer.action.VtimeAction" scope="prototype">
+		<property name="vtimeservice" ref="vtimeservice" />
+	</bean>
+
+</beans>

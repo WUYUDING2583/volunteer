@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD
+3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="volunteer.po.ManHour" table="vtime" catalog="volunteer">
+		<composite-id name="pk" class="volunteer.po.ManHourPK">
+			<key-property name="No" column="No" />
+			<key-property name="Aname" column="Aname" />
+			<key-property name="Adate" column="Adate" />
+		</composite-id>
+		<property name="Avtime" type="float">
+			<column name="Avtime" />
+		</property>
+		<!-- 
+		<many-to-one name="user" class="volunteer.po.User"
+			fetch="select" insert="false" update="false" not-null="false">
+			<column name="No" />
+		</many-to-one>
+		 -->
+
+	</class>
+</hibernate-mapping>
