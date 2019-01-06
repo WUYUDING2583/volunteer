@@ -8,7 +8,9 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 public class BaseHibernateDAO {
 	private SessionFactory sessionFactory;
 	public Session getSession() {
-		 ctx=new FileSystemXmlApplicationContext("C:\\Users\\pc\\Desktop\\volunteer\\WebContent\\WEB-INF\\applicationContext.xml");
+		 String path=this.getClass().getClassLoader().getResource("").getPath();
+		 path=path.substring(0, path.length()-8);
+		 ctx=new FileSystemXmlApplicationContext(path+"/applicationContext.xml");
          sessionFactory = (SessionFactory)ctx.getBean("sessionFactory");
          if(sessionFactory!=null)System.out.println(sessionFactory);  
      return sessionFactory.openSession();

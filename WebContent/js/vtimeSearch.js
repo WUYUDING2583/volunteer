@@ -4,6 +4,10 @@
 $(document).ready(function(){
 	$("button").on("click",function(){
 		var No=$("#No").val();
+		if(No==""){
+			alert("请输入学号");
+			return;
+		}
 		$.ajax({
     		url:"/volunteer/vtimeSearch",
     		type:"post",
@@ -12,17 +16,22 @@ $(document).ready(function(){
     			'pk.No':No
     		},
     		success:function(data){
+    			if(data=="请输入学号"){
+    				alert(data);
+    			}
+    			else{
+    				var detail=eval("("+data+")");
+        			var $str="";
+        			var name=detail[0].Name;
+        			for(var i=0;i<detail.length;i++){
+        				for(var j=0;j<detail[i].manhours.length;j++){
+        					$str+="<tr><td>"+name+"</td><td>"+detail[i].manhours[j].pk.Aname+"</td><td>"+detail[i].manhours[j].pk.Adate+"</td><td>"+detail[i].manhours[j].Avtime+"</td></tr>"
+        	    			
+        				}
+        				}
+        			$("tbody").html($str);
+    			}
     			
-    			var detail=eval("("+data+")");
-    			var $str="";
-    			var name=detail[0].Name;
-    			for(var i=0;i<detail.length;i++){
-    				for(var j=0;j<detail[i].manhours.length;j++){
-    					$str+="<tr><td>"+name+"</td><td>"+detail[i].manhours[j].pk.Aname+"</td><td>"+detail[i].manhours[j].pk.Adate+"</td><td>"+detail[i].manhours[j].Avtime+"</td></tr>"
-    	    			
-    				}
-    				}
-    			$("tbody").html($str);
     		}
 		});
 	});

@@ -176,6 +176,7 @@ $(document).ready(function(){
 			
 	});
 	
+	
 	$("#sub").on("click",function(){
 		if($("#uploadImage").val()==""){
 			alert("请选择图片");
@@ -214,6 +215,8 @@ $(document).ready(function(){
 			}
 			Ajobstate[key]=$(this).val();
 		});
+		
+		var isNum=true;
 		$(".Ajobcount").each(function(key){
 			if($(this).val()==""){
 				flag=1;
@@ -249,6 +252,13 @@ $(document).ready(function(){
             processData: false,
             dataType:"text",
     		success:function(data){ 
+    			if(data=="500"){
+    				alert("请上传图片而非文件");
+    				return;
+    			}else if(data=="450"){
+    				alert("请上传大小在1M以内的图片");
+    				return;
+    			}
     			var str="{'activity':[";
     			for(var i=0;i<Aintime.length;i++){
     				str+="{"+
@@ -297,12 +307,15 @@ $(document).ready(function(){
     	    		},
     	            dataType:"text",
     	    		success:function(data){
-    	    			//alert(data);
-    	    			$("#result").text(data);
-    	    			$('#myModal').modal('show');
-    	    		    setTimeout(function(){  
-    	    		        $("#myModal").modal("hide")
-    	    		    },1200);
+    	    			if(data=="活动添加成功"){
+        	    			$("#result").text(data);
+        	    			$('#myModal').modal('show');
+        	    		    setTimeout(function(){  
+        	    		        $("#myModal").modal("hide")
+        	    		    },1200);
+    	    			}
+    	    			else
+    	    				alert(data);
     	    		},
     	    		error:function(xhr){
     	    			alert('出错。。\n'+xhr.responseText);

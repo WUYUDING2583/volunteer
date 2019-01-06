@@ -51,7 +51,10 @@ $(document).ready(function(){
     		},
     		success:function(data){
     			if(data!=null){
-    				if(data=="500"){
+    				if(data=="400"){
+    					alert("用户名或密码不能为空");
+    				}
+    				else if(data=="500"){
     					alert("身份证号错误");
     				}
     				else{

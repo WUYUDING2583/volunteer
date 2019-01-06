@@ -2,6 +2,8 @@
  * 
  */
 $(document).ready(function(){
+	var isInput=false;
+	
 	$("#vtimeDetail .modal-body").on("click",".delete",function(){
 		var title=$(this).parents(".modal").find(".modal-title").text().split(" ");
 		var Aname=title[0];
@@ -29,8 +31,11 @@ $(document).ready(function(){
 	});
 		
 	
-	
+	//修改工时
 	$("#vtimeDetail .modal-body").on("click",".alterDetail",function(){
+		if(isInput)
+			return;
+		isInput=true;
 		var $btn="<div class='input-group'>"+
                    " <input type='text' class='form-control'>"+
                     "<span class='input-group-btn'>"+
@@ -40,6 +45,14 @@ $(document).ready(function(){
 		$(this).parents("tr").find(".vtime").html($btn);
 		$(".alterSub").on("click",function(){
 			var vtime=$(this).parent().prev().val();
+			if(vtime==""){
+				alert("请输入数字");
+				return;
+			}
+			if(!isNumber(vtime)){
+				alert("工时必须为数字");
+				return;
+			}
 			var title=$(this).parents("tr").attr("id").split("/");
 			var $td=$(this);
 			var Aname=title[0];
@@ -58,12 +71,14 @@ $(document).ready(function(){
 	    		success:function(data){
 	    			if(data!="0"){
 	    				$($td).parents("td").html(vtime);
+	    				isInput=false;
 	    			}
 	    		}
 			});
 		});
 	});
 	
+	//获取工时列表
 	$("tbody").on("click",".alter",function(){
 		var Aname=$(this).parents("tr").children(".Aname").text();
 		var Adate=$(this).parents("tr").children(".Adate").text();
@@ -104,12 +119,31 @@ $(document).ready(function(){
 		});
 	});
 	
+	//判断是否为数字
+	function isNumber(value) {
+	    var patrn = /^(-)?\d+(\.\d+)?$/;
+	    if (patrn.exec(value) == null || value == "") {
+	        return false
+	    } else {
+	        return true
+	    }
+	}
+	
+	//添加工时
 	$(".modal-body").on("click","#addVtime",function(){
 		var title=$(".modal-title").text().split(" ");
 		var Aname=title[0];
 		var Adate=title[1];
 		var No=$("#No").val();
 		var vtime=$("#vtime").val();
+		if(No==""||vtime==""){
+			alert("请输入完整的学号和工时");
+			return;
+		}
+		if(!isNumber(vtime)){
+			alert("工时必须为数字");
+			return;
+		}
 		$.ajax({
     		url:"/volunteer/addVtime",
     		type:"post",
@@ -121,9 +155,10 @@ $(document).ready(function(){
     			'manhour.Avtime':vtime
     		},
     		success:function(data){
-    			$("html").html(data);
-    			return;
-    			if(data!="no"){
+    			if(data=="请输入学号"){
+    				alert(data);
+    			}
+    			else if(data!="no"){
     				var $str="<tr id='"+Aname+"/"+Adate+"/"+No+"'><td class='Name'>"+data+"</td><td class='No'>"+No+"</td><td class='vtime'>"+vtime+"</td>"+
 					"<td><a class='tooltip-test' data-toggle='tooltip' title='修改'>"+
 		      		"<span class='glyphicon glyphicon-pencil alterDetail'></span>"+
@@ -136,7 +171,7 @@ $(document).ready(function(){
     				$("#vtime").val("");
     			}
     			else{
-    				alert("添加失败，请向管理员反应");
+    				alert("请查看格式是否错误");
     			}
     		}
 		});

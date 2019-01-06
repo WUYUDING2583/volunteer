@@ -4,20 +4,29 @@
 "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<constant name="struts.objectFactory" value="spring" />
-	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.enable.DynamicMethodInvocation"
+		value="false" />
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.multipart.maxSize" value="10000000" />
-	<package name="strutsBean" extends="struts-default" namespace="/">
+	<package name="strutsBean" extends="struts-default"
+		namespace="/">
+		<interceptors>
+			<interceptor name="authority"
+				class="volunteer.interceptors.AuthorityInterceptor" />
+		</interceptors>
 		<action name="login" class="222" method="login">
-			<result name="success" type="redirect">/Admin/main.jsp</result>
+			<result name="success">/Admin/main.jsp</result>
 			<result name="fail">/Admin/index.jsp</result>
-		<!-- <result name="input">/Admin/index.jsp</result> -->	
+			<result name="input">/Admin/index.jsp</result>
 		</action>
 		<action name="alterPsw" class="222" method="alterPsw">
 			<result name="success" type="stream">
 				<param name="contentType">text/html; charset=utf-8</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="exit" class="222" method="exit">
 			<result name="success" type="redirect">/Admin/index.jsp</result>
@@ -27,30 +36,49 @@
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="addActivity" class="111" method="addActivity">
 			<result name="success" type="stream">
 				<param name="contentType">text/html; charset=utf-8</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="myActivity" class="111" method="myActivity">
 			<result name="success">/Admin/myActivity.jsp</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="endNotUp" class="111" method="endNotUp">
 			<result name="success">/Admin/uploadVtime.jsp</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="showActivity" class="111" method="showActivity">
 			<result type="stream">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
-		<action name="deleteActivity" class="111" method="deleteActivity">
+		<action name="deleteActivity" class="111"
+			method="deleteActivity">
 			<result type="stream">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="excelJobState" class="333" method="actJobState">
 			<result name="excel" type="stream">
@@ -63,21 +91,33 @@
 				</param>
 				<param name="bufferSize">1024</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="uploadVtime" class="444" method="uploadVtime">
 			<result type="stream">
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="setState" class="111" method="setState">
 			<result name="success" type="stream">
 				<param name="contentType">text/html; charset=utf-8</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="endAndUp" class="111" method="endAndUp">
 			<result name="success">/Admin/alterVtime.jsp</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 
 		<action name="vtimeDetail" class="666" method="vtimeDetail">
@@ -85,38 +125,55 @@
 				<param name="contentType">text/html; charset=utf-8</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="vtimeDelete" class="666" method="vtimeDelete">
 			<result name="success" type="stream">
 				<param name="contentType">text/html; charset=utf-8</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="alterVtime" class="666" method="alterVtime">
 			<result name="success" type="stream">
 				<param name="contentType">text/html; charset=utf-8</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="addVtime" class="666" method="addVtime">
 			<result name="success" type="stream">
 				<param name="contentType">text/html; charset=utf-8</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="vtimeSearch" class="666" method="vtimeSearch">
 			<result name="success" type="stream">
 				<param name="contentType">text/html; charset=utf-8</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="login">/Admin/index.jsp</result>
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="authority" />
 		</action>
 		<action name="isRegister" class="555" method="isRegister" />
-		<action name="insertUserMess" class="555" method="insertUserMess" />
+		<action name="insertUserMess" class="555"
+			method="insertUserMess" />
 		<action name="viewApply" class="555" method="viewApply" />
 		<action name="viewActivity" class="555" method="viewActivity" />
 		<action name="apply" class="555" method="apply" />
 		<action name="searchManHour" class="555" method="searchManHour" />
-		<action name="updateUserMess" class="555" method="updateUserMess" />
+		<action name="updateUserMess" class="555"
+			method="updateUserMess" />
 		<action name="userMess" class="555" method="userMess" />
 		<action name="cancelApply" class="555" method="cancelApply" />
 	</package>

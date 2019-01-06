@@ -43,7 +43,7 @@ public class ExportAction extends ActionSupport {
 	public String getDownloadFileName() {
 		try {
 			System.out.println(fileName);
-			downloadFileName = new String((fileName + ".xls").getBytes("gb2312"), "UTF-8");
+			downloadFileName = java.net.URLEncoder.encode(fileName+".xls", "UTF-8");//new String((fileName + ".xls").getBytes("gb2312"), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();

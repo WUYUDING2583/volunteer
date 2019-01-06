@@ -48,7 +48,7 @@
 	      <td class="Aname"><s:property value="#info.Aname" /></td>
 	      <td class="Pname"><s:property value="#info.publishName" /></td>
 	      <td class="Adate"><s:property value="#info.Adate" /></td>
-	      <td class="Astate"><s:property value="#info.state" /></td>
+	      <td class="Astate">未上传</td>
 	      <td>
 	      	<button class="btn btn-success sub" id="<s:property value="#info.Ano" />">提交工时表</button> 
 	      </td>

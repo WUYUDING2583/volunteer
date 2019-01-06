@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -18,8 +20,8 @@
 <script
 	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="../css/dashboard.css">
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="/volunteer/css/dashboard.css">
+<link rel="stylesheet" href="/volunteer/css/style.css">
 <style>
 #madd {
 	margin-top: 40px;
@@ -36,7 +38,7 @@
 }
 </style>
 <title>携志同行</title>
-<link rel="shortcout icon" href="../backimg/11.ico.jpg" />
+<link rel="shortcout icon" href="/volunteer/backimg/11.ico.jpg" />
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -77,9 +79,8 @@
 						role="tab" data-toggle="tab" id="addActivity">添加活动</a></li>
 					<li role="presentation"><a href="" aria-controls="teacherinfo"
 						role="tab" data-toggle="tab" id="myActivity">我的活动</a></li>
-					<li role="presentation"><a href="" aria-controls="teacherinfo"
-						role="tab" data-toggle="tab" id="sign" class="disabled">活动签到</a></li>
-				</ul></li>
+				</ul>
+			</li>
 			<li><a href="#carSubmenu" data-toggle="collapse"
 				aria-expanded="false" class="dropdown-toggle">工时管理</a>
 				<ul class="nav nav-tabs nav-stacked collapse list-unstyled"
@@ -88,7 +89,8 @@
 						id="uploadVtime" role="tab" data-toggle="tab">工时上传</a></li>
 					<li role="presentation"><a href="" aria-controls="uploadVtime"
 						id="alterVtime" role="tab" data-toggle="tab">工时修改</a></li>
-				</ul></li>
+				</ul>
+			</li>
 			<li><a href="#orderSubmenu" data-toggle="collapse"
 				aria-expanded="false" class="dropdown-toggle">志愿者管理</a>
 				<ul class="nav nav-tabs nav-stacked collapse list-unstyled"
@@ -96,19 +98,22 @@
 					<li role="presentation"><a href="" id="vtimeSearch"
 						aria-controls="orderinfo" role="tab" data-toggle="tab">志愿者工时查询</a>
 					</li>
-				</ul></li>
+				</ul>
+			</li>
 		</ul>
 		</nav>
 	</div>
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
 		id="admin">
-		<iframe src="tip.jsp" width="100%" style="border: none;"></iframe>
+		<iframe src="/volunteer/Admin/tip.jsp" width="100%" style="border: none;"></iframe>
 	</div>
 	<div class="modal fade" id="changePsw" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
+				
+<s:fielderror/>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title">更改密码</h4>
@@ -141,7 +146,7 @@
 		</div>
 		<!-- /.modal -->
 	</div>
-	<script src="../js/main.js"></script>
+	<script src="/volunteer/js/main.js"></script>
 
 </body>
 </html>

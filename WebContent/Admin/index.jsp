@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -30,21 +32,29 @@
 body {
 	background-image: url("/volunteer/backimg/1.jpg");
 }
+
+.errorMessage{
+	padding:0;
+	text-align:center;
+}
+.errorMessage li{
+	list-style-type:none;
+	text-align:center;
+}
 </style>
 
 
 </head>
 <body>
-	<s:fielderror />
+<s:actionerror/>
 	<div class="col-sm-4 col-sm-offset-4" id="window">
 		<div id="myAlert" class="alert alert-danger col-sm-offset-1 col-sm-10"
 			style="margin-top: 30px;">
-			<input type="hidden" id="msg"
-				value="<%=session.getAttribute("wrongMsg")%>">
+			<s:fielderror/>
 			<p class="text-center"></p>
 		</div>
-		<form role="form" class="form-horizontal" action="login"
-			method="post">
+		<form role="form" class="form-horizontal" action="/volunteer/login" method="post"
+			submit="return login()">
 			<div class="form-group" style="margin-top: 30px;">
 				<div class="col-sm-offset-1 col-sm-10">
 					<input type="text" class="form-control input-lg" id="userNo"
@@ -59,8 +69,8 @@ body {
 			</div>
 			<div class="form-group" style="margin-bottom: 30px;">
 				<div class="col-sm-offset-1 col-sm-10">
-					<button type="button" class="btn btn-info btn-block btn-lg"
-						id="login">登陆</button>
+					<input type="submit" class="btn btn-info btn-block btn-lg"
+						id="login" value="登陆" />
 				</div>
 			</div>
 		</form>
@@ -69,29 +79,31 @@ body {
 		var windowHeight = $(window).height();
 		$("#window").css("margin-top", windowHeight * 0.25 + 'px')
 		$("#window").height(windowHeight * 0.5);
-		if ($("#msg").val() != "null") {
-			$("p").text($("#msg").val());
-		} else {
+		if ($(".errorMessage").length>0) {
+			$("p").text($(".errorMessage").text());
+			$(".errorMessage").remove();
+		} else { 
 			$("p").text("欢迎登陆\"携志同行\"志愿者管理平台");
 		}
 		$(document).ready(function() {
 
-			$("#login").on("click", function() {
+			function login() {
 				var username = $("#userNo").val();
 				var password = $("#password").val();
 				if (username == "") {
 					$("p").text("用户名不能为空");
-					return;
+					return false;
 				}
 				if (password == "") {
 					$("p").text("密码不能为空");
-					return;
+					return false;
 				}
-				$("form").submit();
+				return true;
 
-			});
+			}
 
 			$("input").on("focus", function() {
+				$(".errorMessage").remove();
 				$("p").text("欢迎登陆\"携志同行\"志愿者管理平台");
 			});
 		});
