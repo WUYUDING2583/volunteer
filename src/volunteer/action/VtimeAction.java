@@ -63,7 +63,12 @@ public class VtimeAction {
 		if (flag) {
 			manhourList = vtimeservice.vtimeSearch(No);
 			Gson gson = new Gson();
-			message = gson.toJson(manhourList);
+			if (manhourList.isEmpty() || manhourList.size() == 0) {
+				message = "500";
+				System.out.println("NULL");
+			}
+			else
+				message = gson.toJson(manhourList);
 		}
 		try {
 			inputStream = new ByteArrayInputStream(message.getBytes("UTF-8"));

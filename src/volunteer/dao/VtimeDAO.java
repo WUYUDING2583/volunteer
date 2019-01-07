@@ -39,15 +39,15 @@ public class VtimeDAO extends BaseHibernateDAO implements IVtimeDAO{
 		
 		List result=queryObject.list(); 
 		
-		User temp=(User) result.get(0);
-		Set<ManHour> temp1=temp.getManhours();
+		/*User temp=(User) result.get(0);
+		Set<ManHour> temp1=temp.getManhours();*/
 		tran.commit();
-		System.out.println("Dsgd:");
+		/*System.out.println("Dsgd:");
 		System.out.println(temp.getName()+"   ");
 		for(ManHour item:temp1)
 		{
 			System.out.println(item.getPk().getAname());
-		}
+		}*/
 		session.flush();
 		session.close();
 		return result;

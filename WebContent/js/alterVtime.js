@@ -73,6 +73,9 @@ $(document).ready(function(){
 	    				$($td).parents("td").html(vtime);
 	    				isInput=false;
 	    			}
+	    			else{
+	    				alert("工时修改失败，请确认工时是否为数字");
+	    			}
 	    		}
 			});
 		});
@@ -158,7 +161,13 @@ $(document).ready(function(){
     			if(data=="请输入学号"){
     				alert(data);
     			}
-    			else if(data!="no"){
+    			else if(data=="no"){
+    				alert("请查看格式是否错误或该学号是否已在平台注册");
+    			}
+    			else if(data=="overlap"){
+    				alert("该学号工时已存在请勿重复添加");
+    			}
+    			else{
     				var $str="<tr id='"+Aname+"/"+Adate+"/"+No+"'><td class='Name'>"+data+"</td><td class='No'>"+No+"</td><td class='vtime'>"+vtime+"</td>"+
 					"<td><a class='tooltip-test' data-toggle='tooltip' title='修改'>"+
 		      		"<span class='glyphicon glyphicon-pencil alterDetail'></span>"+
@@ -169,9 +178,6 @@ $(document).ready(function(){
     				$($str).prependTo("#vtimeList tbody");
     				$("#No").val("");
     				$("#vtime").val("");
-    			}
-    			else{
-    				alert("请查看格式是否错误");
     			}
     		}
 		});
